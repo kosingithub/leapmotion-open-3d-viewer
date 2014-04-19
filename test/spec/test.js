@@ -1,13 +1,11 @@
 /* global describe, it */
 
-(function () {
+(function() {
     'use strict';
 
-    describe('Give it some context', function () {
-        describe('maybe a bit more context here', function () {
-            it('should run here few assertions', function () {
-
-            });
+    describe('app', function() {
+        it('should contain an o3v namespace', function() {
+            expect(o3v).to.not.be.undefined;
         });
     });
 })();

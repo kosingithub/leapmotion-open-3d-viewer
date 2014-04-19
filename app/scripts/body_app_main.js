@@ -6,6 +6,7 @@ var o3v = {
     }
 }; // open-3d-viewer namespace
 
+
 $(document).ready(function() {
     // The assignment to window.viewer_ is ONLY for debugging.
     // This variable should NEVER be accessed from code.
