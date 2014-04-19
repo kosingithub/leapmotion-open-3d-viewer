@@ -94,7 +94,7 @@ o3v.normalize = function(dst, a) {
 
 function Renderer(canvas, textureFromMaterialFunction) {
   //TODO ilopez dinamically find this file
-  getHttpRequest('../vendor/webgl/shaders.txt', this.onloadShaders.bind(this));
+  getHttpRequest('../scripts/vendor/webgl/shaders.txt', this.onloadShaders.bind(this));
 
   this.canvas_ = canvas;
   this.textureFromMaterialFunction_ = textureFromMaterialFunction;
