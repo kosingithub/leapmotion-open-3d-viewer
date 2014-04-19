@@ -1,0 +1,94 @@
+body {
+font-family: Helvetica, Arial, sans-serif;
+margin: 0;
+}
+
+h1 {
+	font-size: 22px;
+	font-weight: normal;
+	margin: 0 0 10px 0;
+	padding: 50px 0 0 0;
+	color: #000;
+}
+
+h2 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000;
+	line-height: 18px;
+	margin: 0 0 6px 0;
+}
+
+p {
+	font-size: 13px;
+	line-height: 18px;
+	color: #666;
+}
+
+.content ul { margin: 0 0 15px 0; padding-left: 15px; list-style-type: square; }
+.content ul li {
+padding: 0;
+margin: 0px 0px 8px 15px;
+list-style-type: square;
+font-size: 13px;
+vertical-align: middle;
+min-height: 16px;
+color: #666;
+}
+
+a:link, a:visited { color: #6799CC; text-decoration: none; }
+a:hover { color: #92B0CE; text-decoration: none; }
+
+
+#bg-note {
+	background: transparent url(/images/bg-note.png) no-repeat top right;
+	min-height: 400px;
+}
+
+#bg-about {
+	background: transparent url(/images/bg-about.png) no-repeat top right;
+	min-height: 400px;
+}
+
+#bg-contact {
+	background: transparent url(/images/bg-contact.png) no-repeat top right;
+	min-height: 400px;
+}
+
+
+div#ad {
+    background-color: black;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
+    font-family: 'Titillium Web',sans-serif;
+    font-size: 16px;
+	/* height:30px; */
+    height: 277px;
+    position: absolute;
+    right: 8px;
+    top: 42px;
+    width: 220px;
+	overflow:hidden;
+	z-index:1;
+}
+
+div#ad a{
+	z-index:1;
+	position:relative;
+}
+
+div#ad div.ad-closed{
+	float:left;
+	margin:4px 0 0 10px;
+}
+
+div#ad img.ad-arrow{
+	float:right;
+	margin:12px 10px 0 0;
+	position:relative;
+	z-index:1;
+}
+
+div#ad .ad-closed{
+	display:none;
+}
