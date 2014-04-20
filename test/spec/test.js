@@ -3,7 +3,7 @@
     describe('app', function() {
         it('should define window.o3v namespace', function() {
             expect(window.o3v.options.imageSearchUrl).to.equal('images/search.png');
-            expect(window.o3v.MODELS.length).to.equal(2);
+            expect(window.o3v.MODELS.length).to.equal(3);
             expect(window.o3v.MODELS[0].name).to.equal('adult_female.obj');
             expect(window.o3v.MODELS[0].scriptName).to.equal('adult_female.js');
             expect(window.o3v.MODELS[0].modelPath).to.equal('models/adult_female/');
