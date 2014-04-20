@@ -66,7 +66,7 @@ varying vec3 v_normal;
 
 void main() {
   float scaledColor = a_colorIndex * u_colorScale;
-  float redColor = floor(scaledColor / (256.0 * 256.0));
+  float redColor = floor(scaledColor / (256.0 * 256.0) ) + 1.0;
   float greenColor = floor((scaledColor - redColor * 256.0 * 256.0) / 256.0);
   float blueColor = (scaledColor - greenColor * 256.0 - redColor * 256.0 * 256.0);
   v_color = vec4(redColor / 255.0, greenColor / 255.0, blueColor / 255.0, 1);
