@@ -23,7 +23,7 @@
                 numLayers: 7
             }
         ]
-    }; // open-3d-viewer namespace
+    };
 
     jQuery(document).ready(function() {
         // The assignment to window.viewer_ is ONLY for debugging.

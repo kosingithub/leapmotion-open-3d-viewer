@@ -3,8 +3,8 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass-official": "~3.1.0",
-    "jquery": "2.1.0",
-    "jquery-ui": "1.8.23",
+    "jquery": "~2.1.0",
+    "jquery-ui": "~1.10.4",
     "requirejs": "~2.1.11"
   },
   "devDependencies": {}
