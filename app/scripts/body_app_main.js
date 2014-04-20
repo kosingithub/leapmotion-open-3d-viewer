@@ -1,4 +1,4 @@
-(function(exports, document) {
+(function (exports, document) {
     'use strict';
 
     exports.o3v = {
@@ -25,14 +25,14 @@
         ]
     };
 
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         // The assignment to window.viewer_ is ONLY for debugging.
         // This variable should NEVER be accessed from code.
-        window.viewer_ = new o3v.Viewer();
+        window.viewer_ = new exports.o3v.Viewer();
 
         jQuery('a[rel*=facebox]').facebox();
 
-        jQuery('#ad a').click(function() {
+        jQuery('#ad a').click(function () {
             var link = jQuery(this);
 
             if (link.hasClass('ad-arrow')) {
