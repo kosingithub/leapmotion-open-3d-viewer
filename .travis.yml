@@ -11,5 +11,5 @@ before_script:
     - npm install -g grunt-cli bower
 script:
     # We want to gate on passing tests and a successful build
-    - bower install
+    - bower install -v --debug
     - grunt
