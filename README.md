@@ -14,3 +14,4 @@ leapmotion-open-3d-viewer
     ```
     grunt dev
     ```
+[![Build Status](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer.png?branch=master)](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer)
