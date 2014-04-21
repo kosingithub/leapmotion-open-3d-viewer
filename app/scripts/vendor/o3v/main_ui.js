@@ -16,59 +16,62 @@
  * @fileoverview GUI elements of the page (buttons, slider, etc).
  */
 
-o3v.MainUI = function(nextModelCallback) {
+o3v.MainUI = function (nextModelCallback) {
 
-  // Canvas.
-  $('<canvas>').appendTo('body').css({
-      'position': 'absolute',
-      'width': '100%',
-      'height': '100%',
-      'z-index': o3v.uiSettings.ZINDEX_VIEWER
+    // Canvas.
+    $('<canvas>').appendTo('body').css({
+        'position': 'absolute',
+        'width': '100%',
+        'height': '100%',
+        'z-index': o3v.uiSettings.ZINDEX_VIEWER
     }).attr('id', 'viewer');
-  this.canvas_ = $('#viewer')[0];
-  this.canvas_.onselectstart = function() {return false;};
-  this.canvas_.onmousedown = function() {return false;};
+    this.canvas_ = $('#viewer')[0];
+    this.canvas_.onselectstart = function () {
+        return false;
+    };
+    this.canvas_.onmousedown = function () {
+        return false;
+    };
 
 
-
-  // Model selector.
-  this.modelBtn_ = $('<div>').appendTo('body').css({
-      'position': 'absolute',
-      'left': '17px',
-      'top': '150px',
-      'width': '45px',
-      'height': '50px',
-      'border-left': '2px solid #6799CC',
-      'border-top-left-radius': '16px',
-      'border-top-right-radius': '16px',
-      'border-top': '2px solid #6799CC',
-      'border-right': '2px solid #6799CC',
-      'border-bottom': '1px solid #C7D9EC',
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-color': '#fff',
-      'z-index': o3v.uiSettings.ZINDEX_MAINUI
+    // Model selector.
+    this.modelBtn_ = $('<div>').appendTo('body').css({
+        'position': 'absolute',
+        'left': '17px',
+        'top': '150px',
+        'width': '45px',
+        'height': '50px',
+        'border-left': '2px solid #6799CC',
+        'border-top-left-radius': '16px',
+        'border-top-right-radius': '16px',
+        'border-top': '2px solid #6799CC',
+        'border-right': '2px solid #6799CC',
+        'border-bottom': '1px solid #C7D9EC',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-color': '#fff',
+        'z-index': o3v.uiSettings.ZINDEX_MAINUI
     }).click(nextModelCallback);
 };
 
-o3v.MainUI.prototype.setModelSelectorButton = function(iconFile) {
+o3v.MainUI.prototype.setModelSelectorButton = function (iconFile) {
 
-  this.modelBtn_.css({
-    'background-image': 'url(' + iconFile + ')'
+    this.modelBtn_.css({
+        'background-image': 'url(' + iconFile + ')'
     });
 };
 
-o3v.MainUI.prototype.getCanvas = function() {
-  return this.canvas_;
+o3v.MainUI.prototype.getCanvas = function () {
+    return this.canvas_;
 };
 
-o3v.MainUI.prototype.showLoadingFeedback = function(show) {
-  document.getElementById('loading-feedback').style.visibility =
-    show ? 'visible' : 'hidden';
-  
-  document.getElementById('loading-bar').style.width = '0px';
+o3v.MainUI.prototype.showLoadingFeedback = function (show) {
+    document.getElementById('loading-feedback').style.visibility =
+        show ? 'visible' : 'hidden';
+
+    document.getElementById('loading-bar').style.width = '0px';
 };
 
-o3v.MainUI.prototype.getLastButton = function() {
-  return this.modelBtn_.get(0);
+o3v.MainUI.prototype.getLastButton = function () {
+    return this.modelBtn_.get(0);
 };

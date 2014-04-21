@@ -10,8 +10,8 @@ leapmotion-open-3d-viewer
     ```
     npm install
     ```
-3. run
+3. Run
     ```
-    grunt dev
+    grunt serve
     ```
 [![Build Status](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer.png?branch=master)](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer)

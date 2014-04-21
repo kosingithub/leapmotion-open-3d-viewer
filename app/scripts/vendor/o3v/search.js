@@ -16,7 +16,7 @@
  * @fileoverview Search.
  */
 
-o3v.Search = function(selectCallback) {
+o3v.Search = function (selectCallback) {
 
     var imageSearchUrl = o3v.options.imageSearchUrl || 'search.png';
 
@@ -38,20 +38,20 @@ o3v.Search = function(selectCallback) {
         'color': '#999'
     });
 
-    this.searchbox_.focus(function() {
+    this.searchbox_.focus(function () {
         if (this.value == 'Search') {
             this.value = '';
         }
     });
 
-    this.searchbox_.blur(function() {
+    this.searchbox_.blur(function () {
         if (this.value == '') {
             this.value = 'Search';
         }
     });
 };
 
-o3v.Search.prototype.reset = function(searchTokens) {
+o3v.Search.prototype.reset = function (searchTokens) {
 
     if (this.searchbox_.data('autocomplete')) {
         this.searchbox_.autocomplete('destroy');
@@ -59,19 +59,19 @@ o3v.Search.prototype.reset = function(searchTokens) {
 
     this.terms_ = searchTokens;
     this.searchbox_.autocomplete({
-            source: this.find.bind(this),
-            delay: 0,
-            autoFocus: true,
-            selectFirst: true,
-            select: function(event, ui) {
-                this.handleResult_.bind(event, ui);
-                this.searchbox_[0].blur();
-            }.bind(this),
-            focus: this.handleResult_.bind(this)
-        });
+        source: this.find.bind(this),
+        delay: 0,
+        autoFocus: true,
+        selectFirst: true,
+        select: function (event, ui) {
+            this.handleResult_.bind(event, ui);
+            this.searchbox_[0].blur();
+        }.bind(this),
+        focus: this.handleResult_.bind(this)
+    });
 };
 
-o3v.Search.prototype.find = function(query, callback) {
+o3v.Search.prototype.find = function (query, callback) {
     var token = query.term;
 
     var matches = [];
@@ -90,7 +90,7 @@ o3v.Search.prototype.find = function(query, callback) {
     callback(matches);
 };
 
-o3v.Search.prototype.handleResult_ = function(event, ui) {
+o3v.Search.prototype.handleResult_ = function (event, ui) {
     this.selectCallback_(ui.item.value);
 };
 

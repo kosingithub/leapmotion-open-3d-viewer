@@ -15,117 +15,117 @@
 /**
  * @fileoverview Navigational controls for main UI of open-3d-viewer.
  */
-o3v.navUI = function(reset, move, zoom) {
+o3v.navUI = function (reset, move, zoom) {
 
-  homeBtn = null;
-  upBtn = null;
-  leftBtn = null;
-  rightBtn = null;
-  downBtn = null;
-  zoomIn = null;
-  zoomOut = null;
+    homeBtn = null;
+    upBtn = null;
+    leftBtn = null;
+    rightBtn = null;
+    downBtn = null;
+    zoomIn = null;
+    zoomOut = null;
 
-  this.reset_ = reset;
-  this.move_ = move;
-  this.zoom_ = zoom;
+    this.reset_ = reset;
+    this.move_ = move;
+    this.zoom_ = zoom;
 
-  var navBtnStyles = {
-    'position': 'absolute',
-    'width': '19px',
-    'height': '19px',
-    'z-index': o3v.uiSettings.ZINDEX_MAINUI
-  };
+    var navBtnStyles = {
+        'position': 'absolute',
+        'width': '19px',
+        'height': '19px',
+        'z-index': o3v.uiSettings.ZINDEX_MAINUI
+    };
 
-  this.navHome = $('<div>').appendTo('body').css(navBtnStyles).css({
-      'left': '32px',
-      'top': '72px'
+    this.navHome = $('<div>').appendTo('body').css(navBtnStyles).css({
+        'left': '32px',
+        'top': '72px'
     }).button({
-     icons: {
-       primary: 'ui-icon-home'
-     },
-     text: false
-      }).click(function () {
-          this.reset_();
+            icons: {
+                primary: 'ui-icon-home'
+            },
+            text: false
+        }).click(function () {
+            this.reset_();
         }.bind(this));
-  var homeEl = this.navHome.get(0);
-  this.navUp = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-triangle-1-n'
-   },
-   text: false
+    var homeEl = this.navHome.get(0);
+    this.navUp = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-triangle-1-n'
+        },
+        text: false
     }).position({
-     my: 'bottom',
-     at: 'top',
-     of: homeEl,
-     collision: 'none'
-      }).click(function () {
-          this.move_(0, -o3v.navUI.MOVE_FACTOR);
+            my: 'bottom',
+            at: 'top',
+            of: homeEl,
+            collision: 'none'
+        }).click(function () {
+            this.move_(0, -o3v.navUI.MOVE_FACTOR);
         }.bind(this));
-  this.navLeft = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-triangle-1-w'
-   },
-   text: false
+    this.navLeft = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-triangle-1-w'
+        },
+        text: false
     }).position({
-     my: 'right',
-     at: 'left',
-     of: homeEl,
-     collision: 'none'
-      }).click(function () {
-          this.move_(-o3v.navUI.MOVE_FACTOR, 0);
+            my: 'right',
+            at: 'left',
+            of: homeEl,
+            collision: 'none'
+        }).click(function () {
+            this.move_(-o3v.navUI.MOVE_FACTOR, 0);
         }.bind(this));
-  this.navRight = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-triangle-1-e'
-   },
-   text: false
+    this.navRight = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-triangle-1-e'
+        },
+        text: false
     }).position({
-     my: 'left',
-     at: 'right',
-     of: homeEl,
-     collision: 'none'
-      }).click(function () {
-          this.move_(o3v.navUI.MOVE_FACTOR, 0);
+            my: 'left',
+            at: 'right',
+            of: homeEl,
+            collision: 'none'
+        }).click(function () {
+            this.move_(o3v.navUI.MOVE_FACTOR, 0);
         }.bind(this));
-  this.navDown = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-triangle-1-s'
-   },
-   text: false
+    this.navDown = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-triangle-1-s'
+        },
+        text: false
     }).position({
-     my: 'top',
-     at: 'bottom',
-     of: homeEl,
-     collision: 'none'
-      }).click(function () {
-          this.move_(0, o3v.navUI.MOVE_FACTOR);
+            my: 'top',
+            at: 'bottom',
+            of: homeEl,
+            collision: 'none'
+        }).click(function () {
+            this.move_(0, o3v.navUI.MOVE_FACTOR);
         }.bind(this));
-  this.navZoomIn = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-plus'
-   },
-   text: false
+    this.navZoomIn = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-plus'
+        },
+        text: false
     }).position({
-     my: 'top',
-     at: 'bottom',
-     of: this.navDown.get(0),
-     offset: '10 7',
-     collision: 'none'
-      }).click(function () {
-          this.zoom_(0, o3v.navUI.ZOOM_FACTOR);
+            my: 'top',
+            at: 'bottom',
+            of: this.navDown.get(0),
+            offset: '10 7',
+            collision: 'none'
+        }).click(function () {
+            this.zoom_(0, o3v.navUI.ZOOM_FACTOR);
         }.bind(this));
-  this.navZoomOut = $('<div>').appendTo('body').css(navBtnStyles).button({
-   icons: {
-     primary: 'ui-icon-minus'
-   },
-   text: false
+    this.navZoomOut = $('<div>').appendTo('body').css(navBtnStyles).button({
+        icons: {
+            primary: 'ui-icon-minus'
+        },
+        text: false
     }).position({
-     my: 'right',
-     at: 'left',
-     of: this.navZoomIn.get(0),
-     collision: 'none'
-      }).click(function () {
-          this.zoom_(0, -o3v.navUI.ZOOM_FACTOR);
+            my: 'right',
+            at: 'left',
+            of: this.navZoomIn.get(0),
+            collision: 'none'
+        }).click(function () {
+            this.zoom_(0, -o3v.navUI.ZOOM_FACTOR);
         }.bind(this));
 };
 

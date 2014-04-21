@@ -16,16 +16,16 @@
  * @fileoverview Platform-specific gestures for open-3d-viewer.
  */
 
-o3v.Gestures = function() {
-  this.isMac_ = navigator.platform &&
-                (navigator.platform.indexOf('Mac') == 0);
+o3v.Gestures = function () {
+    this.isMac_ = navigator.platform &&
+        (navigator.platform.indexOf('Mac') == 0);
 };
 
 // Reports whether a click should be treated as a "hide" gesture.
 // On Windows and other non-Mac platforms, we use ctrl-click for hide. On Mac,
 // we use command-click, because ctrl-click brings up a context menu.
-o3v.Gestures.prototype.isHideClick = function(controlKeyDown, metaKeyDown) {
-  if (controlKeyDown && !this.isMac_) return true;
-  if (metaKeyDown && this.isMac_) return true;
-  return false;
+o3v.Gestures.prototype.isHideClick = function (controlKeyDown, metaKeyDown) {
+    if (controlKeyDown && !this.isMac_) return true;
+    if (metaKeyDown && this.isMac_) return true;
+    return false;
 };
