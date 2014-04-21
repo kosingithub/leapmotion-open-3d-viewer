@@ -1,6 +1,13 @@
 (function (exports) {
     'use strict';
     exports.appOptions = {
+        layersUI:{
+            //TODO add constants for each layer number(i.e BONES, NERVES, MUSCLES, etc)
+            //TODO implement a `visible` flag to hide/show the layers ui
+            /*TODO create a config to set the initial settings of the multislider
+                visibleLayers = [BONES,NERVES];
+              */
+        },
         MODELS: [
             {
                 name: 'adult_female.obj',

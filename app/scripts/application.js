@@ -39,6 +39,9 @@
         this.run = function (options) {
             this.init(options);
             this._viewer = new exports.o3v.Viewer();
+            /*TODO create fields objects that encapsulates several viewer objects and uses options
+             this.navigator = new Navigator(this._viewer,options)
+             */
         };
     };
 })(window);
