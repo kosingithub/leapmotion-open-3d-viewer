@@ -24,28 +24,19 @@
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
         <script src="scripts/vendor/facebox/facebox.js" type="text/javascript"></script>
+        <script src="../bower_components/gl-matrix/gl-matrix.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
-        <!-- build:js scripts/body_app.js -->
-        <!-- bower:js -->
-        <script type="text/javascript" src="scripts/body_app_main.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
-
-        <!-- build:js scripts/webgl.js -->
-        <!-- bower:js -->
-        <script type="text/javascript" src="../bower_components/gl-matrix/gl-matrix.js"></script>
-        <script type="text/javascript" src="scripts/vendor/webgl/webgl.js"></script>
-        <script type="text/javascript" src="scripts/vendor/webgl/loader.js"></script>
-        <script type="text/javascript" src="scripts/vendor/webgl/renderer.js"></script>
-        <script type="text/javascript" src="scripts/vendor/webgl/webgl_util.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
 
         <!-- o3v specific -->
         <!-- build:js scripts/o3v.js -->
         <!-- bower:js -->
+        <script type="text/javascript" src="scripts/vendor/o3v/initializer.js"></script>
+        <script type="text/javascript" src="scripts/vendor/webgl/webgl.js"></script>
+        <script type="text/javascript" src="scripts/vendor/webgl/loader.js"></script>
+        <script type="text/javascript" src="scripts/vendor/webgl/renderer.js"></script>
+        <script type="text/javascript" src="scripts/vendor/webgl/webgl_util.js"></script>
         <script type="text/javascript" src="scripts/vendor/o3v/common.js"></script>
         <script type="text/javascript" src="scripts/vendor/o3v/entities.js"></script>
         <script type="text/javascript" src="scripts/vendor/o3v/content.js"></script>
@@ -67,6 +58,16 @@
         <script type="text/javascript" src="scripts/vendor/o3v/viewer.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+
+
+        <!-- build:js scripts/body_app.js -->
+        <!-- bower:js -->
+        <script type="text/javascript" src="scripts/configuration.js"></script>
+        <script type="text/javascript" src="scripts/application.js"></script>
+        <script type="text/javascript" src="scripts/body.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
     </head>
 
     <body>

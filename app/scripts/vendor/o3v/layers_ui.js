@@ -350,7 +350,7 @@ o3v.LayersUI.SliderToggle.prototype.build = function (lastIcon) {
 
 o3v.LayersUI.SliderToggle.prototype.setArt = function () {
     this.button.css({
-        'background-image': this.single ? 'url(css/img/toggle_single_slider.png)' : 'url(css/img/toggle_multiple_sliders.png)'
+        'background-image': this.single ? 'url(styles/img/toggle_single_slider.png)' : 'url(styles/img/toggle_multiple_sliders.png)'
     });
 };
 

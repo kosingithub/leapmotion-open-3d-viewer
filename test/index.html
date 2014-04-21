@@ -8,6 +8,8 @@
 </head>
 <body>
     <div id="mocha"></div>
+
+
     <script src="bower_components/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src="bower_components/chai/chai.js"></script>
@@ -18,10 +20,44 @@
     </script>
 
 
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="scripts/vendor/facebox/facebox.js"></script>
+    <script src="../bower_components/gl-matrix/gl-matrix.js"></script>
+
+
+    <script type="text/javascript" src="scripts/vendor/o3v/initializer.js"></script>
+    <script type="text/javascript" src="scripts/vendor/webgl/webgl.js"></script>
+    <script type="text/javascript" src="scripts/vendor/webgl/loader.js"></script>
+    <script type="text/javascript" src="scripts/vendor/webgl/renderer.js"></script>
+    <script type="text/javascript" src="scripts/vendor/webgl/webgl_util.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/common.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/entities.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/content.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/layer.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/history.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/layers_ui.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/gestures.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/select.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/label.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/nav_ui.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/navigate.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/input_handler.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/search.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/select.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/interpolant.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/opacity.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/main_ui.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/render_interface.js"></script>
+    <script type="text/javascript" src="scripts/vendor/o3v/viewer.js"></script>
+
+
     <!-- include source files here... -->
-    <script src="scripts/body_app_main.js"></script>
+    <script src="scripts/configuration.js"></script>
+    <script src="scripts/application.js"></script>
     <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
+
+    <script src="spec/application_spec.js"></script>
 
     <script>mocha.run()</script>
 </body>

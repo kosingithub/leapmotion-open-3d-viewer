@@ -19,6 +19,7 @@
     "smarttabs": true,
     "jquery": true,
     "globals"   : {
+        "Application": false,
         /* MOCHA */
         "describe"   : false,
         "it"         : false,
