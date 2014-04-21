@@ -27,7 +27,9 @@
                     }
                 }
             });
-        };
+            },
+            self = this;
+
 
         this.viewer = null;
         this.init = function (options) {
@@ -38,22 +40,25 @@
 
         this.run = function (options) {
             this.init(options);
-            this._viewer = new exports.o3v.Viewer();
+            self._viewer = new exports.o3v.Viewer();
+            self.navigator = new Navigator(self._viewer,options);
+
             /*TODO create fields objects that encapsulates several viewer objects and uses options
-            this.layersManager = new LayersManager(this._viewer,options);
-             the layersManager should have at least the following methods
-                  setLayerUiVisibility(:boolean)
-                  showLayers(layers:array)
-                  hideLayers(layers:array)
-             this.navigator = new Navigator(this._viewer,options)
+              this.layersManager = new LayersManager(this._viewer,options);
+                 the layersManager should have at least the following methods
+                 setLayerUiVisibility(:boolean)
+                 showLayers(layers:array)
+                 hideLayers(layers:array)
+
+              this.navigator = new Navigator(this._viewer,options)
                  the navigator should have at least the following methods
-                      moveModel[Left|Right|Down|Top]();
-                      moveCamera[Left|Right|Down|Top]();
-                      continuouslyMoveModel[Left|Right|Down|Top](velocity:float);
-                      stopModelMovement();
-                      enableSupermanMode();
-                      disableSupermanMode();
-             */
+                 moveModel[Left|Right|Down|Top]();
+                 moveCamera[Left|Right|Down|Top]();
+                 continuouslyMoveModel[Left|Right|Down|Top](velocity:float);
+                 stopModelMovement();
+                 enableSupermanMode();
+                 disableSupermanMode();
+                 */
         };
     };
 })(window);

@@ -2,8 +2,9 @@
     'use strict';
 
     jQuery(document).ready(function () {
-        var app = new exports.Application();
-        app.run(exports.appOptions);
+        window.app = new exports.Application();
+        window.app.run(exports.appOptions);
+
     });
 
 })(window, document);
