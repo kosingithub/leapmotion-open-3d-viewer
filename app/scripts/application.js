@@ -1,4 +1,4 @@
-(function (exports) {
+(function (exports, $) {
     'use strict';
 
     exports.Application = function () {
@@ -61,4 +61,4 @@
                  */
         };
     };
-})(window);
+})(window, window.jQuery);
