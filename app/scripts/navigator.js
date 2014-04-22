@@ -12,5 +12,10 @@
             //TODO move the MOVE_FACTOR to the app configs
             move(-exports.o3v.navUI.MOVE_FACTOR, 0);
         };
+        this.moveRight = function (){
+
+           //TODO move the MOVE_FACTOR to the app configs
+           move(exports.o3v.navUI.MOVE_FACTOR, 0);
+       }
     };
 })(window);
