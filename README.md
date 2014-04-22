@@ -14,4 +14,4 @@ leapmotion-open-3d-viewer
     ```
     grunt serve
     ```
-[![Build Status](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer.png?branch=master)](https://travis-ci.org/Nearsoft/leapmotion-open-3d-viewer)
+[![Build Status](https://travis-ci.org/TonyMtz/leapmotion-open-3d-viewer.svg)](https://travis-ci.org/TonyMtz/leapmotion-open-3d-viewer)
