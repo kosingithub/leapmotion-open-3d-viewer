@@ -27,8 +27,8 @@
                     }
                 }
             });
-            },
-            self = this;
+        },
+        self = this;
 
 
         this.viewer = null;
@@ -41,7 +41,7 @@
         this.run = function (options) {
             this.init(options);
             self._viewer = new exports.o3v.Viewer();
-            self.navigator = new Navigator(self._viewer,options);
+            self.navigator = new exports.Navigator(self._viewer,options);
 
             /*TODO create fields objects that encapsulates several viewer objects and uses options
               this.layersManager = new LayersManager(this._viewer,options);
