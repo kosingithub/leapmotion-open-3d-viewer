@@ -172,6 +172,11 @@ o3v.LayersUI.MultiSlider.prototype.build = function (putBelow, numLayers) {
             value: this.range,
             slide: function (event, ui) {
                 var layer = (this.sliders.length - 1) - $(event.target).data('id');
+                console.log('-----------');
+                console.log('layer',layer);
+                console.log('value',ui.value);
+                console.log('range',this.range);
+
                 this.layerOpacityManager_.setLayerOpacity(
                     layer, ui.value / this.range, this.updateCallback_);
             }.bind(this),
