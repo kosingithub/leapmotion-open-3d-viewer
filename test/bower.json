@@ -4,7 +4,8 @@
   "dependencies": {
     "chai": "~1.8.0",
     "mocha": "~1.14.0",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "facebox": "v1.3"
   },
   "devDependencies": {}
 }
