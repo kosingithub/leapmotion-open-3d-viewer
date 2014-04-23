@@ -45,7 +45,7 @@
             self.layersManager = new exports.LayersManager(this._viewer,options);
 
             /*TODO create fields objects that encapsulates several viewer objects and uses options
-              this.layersManager = new LayersManager(this._viewer,options);
+                 this.layersManager = new LayersManager(this._viewer,options);
                  the layersManager should have at least the following methods
                  setLayerUiVisibility(:boolean)
                  showLayers(layers:array)

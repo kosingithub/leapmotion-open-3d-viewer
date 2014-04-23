@@ -161,7 +161,7 @@ o3v.LayersUI.MultiSlider.prototype.build = function (putBelow, numLayers) {
         }
     }
     this.sliders = [];
-
+//var selectedLayer = [{skin: 0, muscles: 1, bones: 2, organs: 3, veins: 4, lymphatic: 5, nerves: 6}];
     this.numLayers = numLayers;
     for (i = 0; i < this.numLayers; ++i) {
         var newSlider = $('<div>').appendTo('body').slider({
@@ -177,6 +177,10 @@ o3v.LayersUI.MultiSlider.prototype.build = function (putBelow, numLayers) {
                 console.log('value',ui.value);
                 console.log('range',this.range);
 
+
+//                this.layerOpacityManager_.showLayers(layers:array){
+//
+//                }
                 this.layerOpacityManager_.setLayerOpacity(
                     layer, ui.value / this.range, this.updateCallback_);
             }.bind(this),
