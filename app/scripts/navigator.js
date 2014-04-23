@@ -28,5 +28,5 @@
        	b++;
        	if(b<=a) myVar = setTimeout(function(){ continuouslyMoveModel(a,b,kind); },300);
        }
-   }
+   } 
 })(window);
