@@ -3,6 +3,7 @@
 // this flag and the unused var should be removed!!
 (function(exports){
 	//'use strict';
+	var myVar=null;
 	exports.Navigator = function(viewer, options){
        var viewerNavigator = viewer.navigator_, //
        move = viewerNavigator.drag.bind(viewerNavigator);
