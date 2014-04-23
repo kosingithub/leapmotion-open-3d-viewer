@@ -1,56 +1,48 @@
 (function (exports) {
     'use strict';
-    var layers;
+
     exports.LayersManager = function (viewer) {
-        var _layerOpacityManager = viewer.layerOpacityManager_, //
-            self = this;
+        var _layerOpacityManager = viewer.layerOpacityManager_;
 
-        this.setLayerOpacity = function (layer, value, range) {
-            _layerOpacityManager.setLayerOpacity(
-                layer, value / range, function () {
-                    console.log('change')
-                });
+        this.SKIN = 6;
+        this.MUSCLE = 5;
+        this.BONES = 4;
+        this.ORGANS = 3;
+        this.CIRCULATORY_SYSTEM = 2;
+        this.LYMPHATIC_SYSTEM = 1;
+        this.NERVOUS_SYSTEM = 0;
+
+        this.hideLayers = function (layers) {
+            var layer,  //
+                updateCallback = function () {
+                    console.log('hidden layer : ' + layer);
+                };
+            for (var i = 0; i < layers.length; i++) {
+                layer = layers[i];
+                _layerOpacityManager.setLayerOpacity(
+                    layer, 0 / 10000,updateCallback);
+
+            }
         };
-
-        layers =  {6:{hide:{capa:6},        //SKIN
-                      show:{capa:6, value:10000, range:10000}},
-                   5:{hide:{capa:5, value:0, range:10000},       //MUSCLE
-                      show:{capa:5, value:10000, range:10000}},
-                   4:{hide:{capa:4, value:0, range:10000},      //BONES
-                      show:{capa:4, value:10000, range:10000}},
-                   3:{hide:{capa:3, value:0, range:10000},       //ORGANS
-                      show:{capa:3, value:10000, range:10000}},
-                   2:{hide:{capa:2, value:0, range:10000},      //CIRCULATORY SYSTEM
-                      show:{capa:2, value:10000, range:10000}},
-                   1:{hide:{capa:1, value:0, range:10000},      //LYMPHATIC SYSTEM
-                      show:{capa:1, value:10000, range:10000}},
-                   0:{hide:{capa:0, value:0, range:10000},      //NERVOUS SYSTEM
-                      show:{capa:0, value:10000, range:10000}}};
-
-         this.hideLayers = function(layer){
-                for(var i=0; i<=layer.length; i++){
-                    //if statement goes here, validates  param has undefined  or unmatched element
-                    var turnOff = layers[layer[i]].hide;
-                    _layerOpacityManager.setLayerOpacity(turnOff.capa, 0, 10000);
-                }
-             };
-         this.showLayer = function(layer){
-             for(var i=0; i<=layer.length; i++){
-
-                 var turnOn = layers[layer[i]].show;
-                 _layerOpacityManager.setLayerOpacity(turnOn.capa, 10000,10000);
-             }
-         };
-
-
-    }
-
+        this.showLayers = function (layers) {
+            var layer,  //
+                updateCallback = function () {
+                    console.log('hidden layer : ' + layer);
+                };
+            //TODO implemnt this loop only once, this code is similar to the hide layers
+            for (var i = 0; i < layers.length; i++) {
+                layer = layers[i];
+                _layerOpacityManager.setLayerOpacity(
+                    layer, 10000 / 10000, updateCallback);
+            }
+        };
+    };
 })
 
     (window);
 
-        //this.layersManager = new LayersManager(this._viewer,options);
-        //the layersManager should have at least the following methods
-        //setLayerUiVisibility(:boolean)
-        //showLayers(layers:array)
-        //hideLayers(layers:array)
+//this.layersManager = new LayersManager(this._viewer,options);
+//the layersManager should have at least the following methods
+//setLayerUiVisibility(:boolean)
+//showLayers(layers:array)
+//hideLayers(layers:array)
