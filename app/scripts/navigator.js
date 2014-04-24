@@ -1,4 +1,4 @@
-//* jshint unused: false */
+/* jshint unused: false */
 // TODO - tony - This line silences "options is defined but never used" warning,
 // this flag and the unused var should be removed!!
 (function (exports) {
@@ -42,7 +42,7 @@
         this.moveCameraDown = function () {
             move(0, exports.o3v.navUI.MOVE_FACTOR);
         };
-        
+
         this.continuouslymoveCameraTop = function () {
             this.stopModelMovement();
             continuouslyMoveModel(move, 0, -exports.o3v.navUI.MOVE_FACTOR);
@@ -52,7 +52,7 @@
             this.stopModelMovement();
             continuouslyMoveModel(move, 0, exports.o3v.navUI.MOVE_FACTOR);
         };
-        
+
         //TODO move the ZOOM_FACTOR to the app configs
         this.moveZoomIn = function () {
             zoom(0, exports.o3v.navUI.ZOOM_FACTOR);
@@ -61,7 +61,7 @@
         this.moveZoomOut = function () {
             zoom(0, -exports.o3v.navUI.ZOOM_FACTOR);
         };
-        
+
         this.continuouslymoveZoomIn = function () {
             this.stopModelMovement();
             continuouslyMoveModel(zoom, 0, exports.o3v.navUI.MOVE_FACTOR);
@@ -71,7 +71,7 @@
             this.stopModelMovement();
             continuouslyMoveModel(zoom, 0, -exports.o3v.navUI.MOVE_FACTOR);
         };
-        
+
         this.stopModelMovement = function () {
             clearTimeout(timeoutVar);
         };
