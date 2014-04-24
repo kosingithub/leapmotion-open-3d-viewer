@@ -1,34 +1,34 @@
-/* jshint unused: false */
+//* jshint unused: false */
 // TODO - tony - This line silences "options is defined but never used" warning,
 // this flag and the unused var should be removed!!
 (function (exports) {
     'use strict';
-    var timeoutVar = null;
-
     exports.Navigator = function (viewer, options) {
         var viewerNavigator = viewer.navigator_, //
             move = viewerNavigator.drag.bind(viewerNavigator);
         var zoom = viewerNavigator.scroll.bind(viewerNavigator);
-        this.cameraXInitialValue=0;
+        var setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
+        self.timeoutVar = null;
+        self.cameraXInitialValue=0;
+        self.statusHorizontally=0;
         //TODO move the MOVE_FACTOR to the app configs
+        /*this.moveTop = function () {
+            move(0, 0,-exports.o3v.navUI.MOVE_FACTOR);
+        };*/
         this.moveLeft = function () {
             move(-exports.o3v.navUI.MOVE_FACTOR, 0);
         };
-
         this.moveRight = function () {
             move(exports.o3v.navUI.MOVE_FACTOR, 0);
         };
-
-        this.continuouslyMoveModelLeft = function () {
+        this.continuouslymoveModelLeft = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, -exports.o3v.navUI.MOVE_FACTOR, 0);
+            continuouslyMoveModel(move, [-exports.o3v.navUI.MOVE_FACTOR, 0]);
         };
-
-        this.continuouslyMoveModelRight = function () {
+        this.continuouslymoveModelRight = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, exports.o3v.navUI.MOVE_FACTOR, 0);
+            continuouslyMoveModel(move, [exports.o3v.navUI.MOVE_FACTOR, 0]);
         };
-
         this.changeCamera = function (x, y, z) {
             viewerNavigator.camera.eye[0] = x;
             viewerNavigator.camera.eye[1] = y;
@@ -36,59 +36,64 @@
             viewerNavigator.reset(true);
         };
         this.moveCameraLeft = function () {
-            this.cameraXInitialValue=exports.o3v.navUI.MOVE_FACTOR+this.cameraXInitialValue;
-            setOriginCameraAndModel([this.cameraXInitialValue, -100, -100, 0, 100, 100]);
+            self.cameraXInitialValue=exports.o3v.navUI.MOVE_FACTOR+self.cameraXInitialValue;
+            setOriginCameraAndModel([self.cameraXInitialValue, -100, -100, 0, 100, 100]);
         };
         this.moveCameraRight = function () {
-            this.cameraXInitialValue=-exports.o3v.navUI.MOVE_FACTOR+this.cameraXInitialValue;
-            setOriginCameraAndModel([this.cameraXInitialValue, -100, -100, 0, 100, 100]);
+            self.cameraXInitialValue=-exports.o3v.navUI.MOVE_FACTOR+self.cameraXInitialValue;
+            setOriginCameraAndModel([self.cameraXInitialValue, -100, -100, 0, 100, 100]);
         };
-
         this.moveCameraTop = function () {
             move(0, -exports.o3v.navUI.MOVE_FACTOR);
         };
-
         this.moveCameraDown = function () {
             move(0, exports.o3v.navUI.MOVE_FACTOR);
         };
-
+        this.continuouslymoveCameraLeft = function () {
+            this.stopModelMovement();
+            self.statusHorizontally=exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(setOriginCameraAndModel,[self.cameraXInitialValue, -100, -100, 0, 100, 100]);
+        };
+        this.continuouslymoveCameraRight = function () {
+            this.stopModelMovement();
+            self.statusHorizontally=-exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(setOriginCameraAndModel,[self.cameraXInitialValue, -100, -100, 0, 100, 100]);
+        };
         this.continuouslymoveCameraTop = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, 0, -exports.o3v.navUI.MOVE_FACTOR);
+            continuouslyMoveModel(move, [0, -exports.o3v.navUI.MOVE_FACTOR]);
         };
-
         this.continuouslymoveCameraDown = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, 0, exports.o3v.navUI.MOVE_FACTOR);
+            continuouslyMoveModel(move, [0, exports.o3v.navUI.MOVE_FACTOR]);
         };
-
         //TODO move the ZOOM_FACTOR to the app configs
         this.moveZoomIn = function () {
             zoom(0, exports.o3v.navUI.ZOOM_FACTOR);
         };
-
         this.moveZoomOut = function () {
             zoom(0, -exports.o3v.navUI.ZOOM_FACTOR);
         };
-
         this.continuouslymoveZoomIn = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(zoom, 0, exports.o3v.navUI.MOVE_FACTOR);
+            continuouslyMoveModel(zoom, [0, exports.o3v.navUI.MOVE_FACTOR]);
         };
-
         this.continuouslymoveZoomOut = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(zoom, 0, -exports.o3v.navUI.MOVE_FACTOR);
+            continuouslyMoveModel(zoom, [0, -exports.o3v.navUI.MOVE_FACTOR]);
         };
-
         this.stopModelMovement = function () {
-            clearTimeout(timeoutVar);
+            clearTimeout(self.timeoutVar);
+        };
+        function continuouslyMoveModel(func, args, starts) {
+            if (starts === undefined) { starts = 0; }
+            if(setOriginCameraAndModel===func){
+               self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
+               arguments[1][0]=self.cameraXInitialValue;
+               func(arguments[1]);
+            }else{ func.apply(this,arguments[1]); }
+            if (starts <= 500){ self.timeoutVar = setTimeout(function () { continuouslyMoveModel(func, args, ++starts); }, 80); }
         };
 
-        function continuouslyMoveModel(functions, xAxisTranslate, yAxisTranslate, starts) {
-            if (starts === undefined) { starts = 0; }
-            functions(xAxisTranslate, yAxisTranslate);
-            if (starts <= 500){ timeoutVar = setTimeout(function () { continuouslyMoveModel(functions, xAxisTranslate, yAxisTranslate, ++starts); }, 80); }
-        }
     };
 })(window);
