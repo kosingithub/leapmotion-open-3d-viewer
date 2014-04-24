@@ -12,9 +12,6 @@
         self.cameraXInitialValue=0;
         self.statusHorizontally=0;
         //TODO move the MOVE_FACTOR to the app configs
-        /*this.moveTop = function () {
-            move(0, 0,-exports.o3v.navUI.MOVE_FACTOR);
-        };*/
         this.moveLeft = function () {
             move(-exports.o3v.navUI.MOVE_FACTOR, 0);
         };
@@ -43,7 +40,7 @@
             self.cameraXInitialValue=-exports.o3v.navUI.MOVE_FACTOR+self.cameraXInitialValue;
             setOriginCameraAndModel([self.cameraXInitialValue, -100, -100, 0, 100, 100]);
         };
-        this.moveCameraTop = function () {
+        this.moveCameraUp = function () {
             move(0, -exports.o3v.navUI.MOVE_FACTOR);
         };
         this.moveCameraDown = function () {
@@ -59,7 +56,7 @@
             self.statusHorizontally=-exports.o3v.navUI.MOVE_FACTOR;
             continuouslyMoveModel(setOriginCameraAndModel,[self.cameraXInitialValue, -100, -100, 0, 100, 100]);
         };
-        this.continuouslymoveCameraTop = function () {
+        this.continuouslymoveCameraUp = function () {
             this.stopModelMovement();
             continuouslyMoveModel(move, [0, -exports.o3v.navUI.MOVE_FACTOR]);
         };
