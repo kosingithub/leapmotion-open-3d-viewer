@@ -9,6 +9,7 @@
         var viewerNavigator = viewer.navigator_, //
             move = viewerNavigator.drag.bind(viewerNavigator);
         var zoom = viewerNavigator.scroll.bind(viewerNavigator);
+        this.cameraXInitialValue=0;
         //TODO move the MOVE_FACTOR to the app configs
         this.moveLeft = function () {
             move(-exports.o3v.navUI.MOVE_FACTOR, 0);
@@ -33,6 +34,14 @@
             viewerNavigator.camera.eye[1] = y;
             viewerNavigator.camera.eye[2] = z;
             viewerNavigator.reset(true);
+        };
+        this.moveCameraLeft = function () {
+            this.cameraXInitialValue=exports.o3v.navUI.MOVE_FACTOR+this.cameraXInitialValue;
+            setOriginCameraAndModel([this.cameraXInitialValue, -100, -100, 0, 100, 100]);
+        };
+        this.moveCameraRight = function () {
+            this.cameraXInitialValue=-exports.o3v.navUI.MOVE_FACTOR+this.cameraXInitialValue;
+            setOriginCameraAndModel([this.cameraXInitialValue, -100, -100, 0, 100, 100]);
         };
 
         this.moveCameraTop = function () {
