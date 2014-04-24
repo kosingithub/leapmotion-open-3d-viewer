@@ -8,6 +8,7 @@
             move = viewerNavigator.drag.bind(viewerNavigator);
         var zoom = viewerNavigator.scroll.bind(viewerNavigator);
         var setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
+        var self = null;
         self.timeoutVar = null;
         self.cameraXInitialValue=0;
         self.statusHorizontally=0;
@@ -85,12 +86,12 @@
         function continuouslyMoveModel(func, args, starts) {
             if (starts === undefined) { starts = 0; }
             if(setOriginCameraAndModel===func){
-               self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
-               arguments[1][0]=self.cameraXInitialValue;
-               func(arguments[1]);
+                self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
+                arguments[1][0]=self.cameraXInitialValue;
+                func(arguments[1]);
             }else{ func.apply(this,arguments[1]); }
             if (starts <= 500){ self.timeoutVar = setTimeout(function () { continuouslyMoveModel(func, args, ++starts); }, 80); }
-        };
+        }
 
     };
 })(window);
