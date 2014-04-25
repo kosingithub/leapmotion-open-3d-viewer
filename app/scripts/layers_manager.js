@@ -18,7 +18,11 @@
 
         this.setLayerUiVisibility = function (isVisible) {
             if (isVisible) {
-                //set visibility to ALL
+                $('div').show(300);
+                $('#help').hide();
+                $('#facebox').hide();
+            }else{
+                $('div').hide(300);
             }
         };
 
