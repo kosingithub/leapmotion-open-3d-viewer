@@ -1,4 +1,4 @@
-//* jshint unused: false */
+/* jshint unused: false */
 // TODO - tony - This line silences "options is defined but never used" warning,
 // this flag and the unused var should be removed!!
 (function (exports) {
@@ -84,14 +84,24 @@
             clearTimeout(self.timeoutVar);
         };
         function continuouslyMoveModel(func, args, starts) {
-            if (starts === undefined) { starts = 0; }
-            if(setOriginCameraAndModel===func){
+            /* jshint validthis:true */
+            // TODO - ariel - fix this, see comments on github, commit 2d2ef92d5e90619b26a087c871b64d5409c3cb89
+            // after fix, delete the jshint flag!!!
+            if (starts === undefined) {
+                starts = 0;
+            }
+            if (setOriginCameraAndModel === func ) {
                 self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
                 arguments[1][0]=self.cameraXInitialValue;
                 func(arguments[1]);
-            }else{ func.apply(this,arguments[1]); }
-            if (starts <= 500){ self.timeoutVar = setTimeout(function () { continuouslyMoveModel(func, args, ++starts); }, 80); }
+            } else {
+                func.apply(this, args);
+            }
+            if (starts <= 500) {
+                self.timeoutVar = setTimeout(function () {
+                    continuouslyMoveModel(func, args, ++starts);
+                }, 80);
+            }
         }
-
     };
 })(window);
