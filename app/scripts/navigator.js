@@ -8,7 +8,7 @@
             move = viewerNavigator.drag.bind(viewerNavigator);
         var zoom = viewerNavigator.scroll.bind(viewerNavigator);
         var setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
-        var self = null;
+        var self = this;
         self.timeoutVar = null;
         self.cameraXInitialValue=0;
         self.statusHorizontally=0;
