@@ -435,8 +435,16 @@ o3v.Navigator.prototype.recalculate = function () {
     var angle = this.theta.getPresent();
     var z_val = this.dolly.z.getPresent();
     var y_val = this.dolly.y.getPresent();
-    var verticalMaxLimit = this.vertMaxLimit.getPresent();
-    var verticalMinLimit = this.vertMinLimit.getPresent();
+    
+    //Original - Vertical limits used for automatic rotation of the model
+    //var verticalMaxLimit = this.vertMaxLimit.getPresent();
+    //var verticalMinLimit = this.vertMinLimit.getPresent();
+    
+    //TODO: (Angel) - A way to use original function behavior AND current behavior to not have any conflict
+    //when rotating the model and moving the camera.
+    var verticalMaxLimit = 80;
+    var verticalMinLimit = 80;
+
 
     // this.center[0] = this.center[2] = 0 for normal position
     var cx = z_val * Math.cos(angle) + this.cameraTargetX.getPresent();
@@ -453,7 +461,10 @@ o3v.Navigator.prototype.recalculate = function () {
 
     // Determine if we're in the top hemisphere or lower hemisphere
     if (cy < bottomStartRotation) {
-        phi_multiplier = -1;
+        //original value
+        //phi_multiplier = -1;
+        //Value was set to -3 to have the model rotate 1 complete cycle
+        phi_multiplier = -3;
         ty = bottomStartRotation;
         vertDist = this.absClamp(rotLimit + (verticalMinLimit - cy),
             this.verticalAdjustment + rotLimit);
