@@ -5,12 +5,13 @@
     'use strict';
     exports.Navigator = function (viewer, options) {
         var viewerNavigator = viewer.navigator_, //
-            move = viewerNavigator.drag.bind(viewerNavigator);
-        var zoom = viewerNavigator.scroll.bind(viewerNavigator);
-        var setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
-        var self = this;
+            move = viewerNavigator.drag.bind(viewerNavigator),
+            zoom = viewerNavigator.scroll.bind(viewerNavigator),
+            setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
+        self = this;
         self.timeoutVar = null;
         self.cameraXInitialValue=0;
+        self.statusVertically=0;
         self.statusHorizontally=0;
         //TODO move the MOVE_FACTOR to the app configs
         this.moveLeft = function () {
@@ -21,17 +22,15 @@
         };
         this.continuouslymoveModelLeft = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, [-exports.o3v.navUI.MOVE_FACTOR, 0]);
+            self.statusVertically=-exports.o3v.navUI.MOVE_FACTOR;
+            self.statusHorizontally=0;
+            continuouslyMoveModel(move);
         };
         this.continuouslymoveModelRight = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, [exports.o3v.navUI.MOVE_FACTOR, 0]);
-        };
-        this.changeCamera = function (x, y, z) {
-            viewerNavigator.camera.eye[0] = x;
-            viewerNavigator.camera.eye[1] = y;
-            viewerNavigator.camera.eye[2] = z;
-            viewerNavigator.reset(true);
+            self.statusVertically=exports.o3v.navUI.MOVE_FACTOR;
+            self.statusHorizontally=0;
+            continuouslyMoveModel(move);
         };
         this.moveCameraLeft = function () {
             self.cameraXInitialValue=exports.o3v.navUI.MOVE_FACTOR+self.cameraXInitialValue;
@@ -50,20 +49,24 @@
         this.continuouslymoveCameraLeft = function () {
             this.stopModelMovement();
             self.statusHorizontally=exports.o3v.navUI.MOVE_FACTOR;
-            continuouslyMoveModel(setOriginCameraAndModel,[self.cameraXInitialValue, -100, -100, 0, 100, 100]);
+            continuouslyMoveCameraModel(setOriginCameraAndModel);
         };
         this.continuouslymoveCameraRight = function () {
             this.stopModelMovement();
             self.statusHorizontally=-exports.o3v.navUI.MOVE_FACTOR;
-            continuouslyMoveModel(setOriginCameraAndModel,[self.cameraXInitialValue, -100, -100, 0, 100, 100]);
+            continuouslyMoveCameraModel(setOriginCameraAndModel);
         };
         this.continuouslymoveCameraUp = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, [0, -exports.o3v.navUI.MOVE_FACTOR]);
+            self.statusVertically=0;
+            self.statusHorizontally=-exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(move);
         };
         this.continuouslymoveCameraDown = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(move, [0, exports.o3v.navUI.MOVE_FACTOR]);
+            self.statusVertically=0;
+            self.statusHorizontally=exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(move);
         };
         //TODO move the ZOOM_FACTOR to the app configs
         this.moveZoomIn = function () {
@@ -74,34 +77,41 @@
         };
         this.continuouslymoveZoomIn = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(zoom, [0, exports.o3v.navUI.MOVE_FACTOR]);
+            self.statusVertically=0;
+            self.statusHorizontally=exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(zoom);
         };
         this.continuouslymoveZoomOut = function () {
             this.stopModelMovement();
-            continuouslyMoveModel(zoom, [0, -exports.o3v.navUI.MOVE_FACTOR]);
+            self.statusVertically=0;
+            self.statusHorizontally=-exports.o3v.navUI.MOVE_FACTOR;
+            continuouslyMoveModel(zoom);
         };
         this.stopModelMovement = function () {
             clearTimeout(self.timeoutVar);
         };
-        function continuouslyMoveModel(func, args, starts) {
+        function continuouslyMoveModel(func, starts) {
             /* jshint validthis:true */
             // TODO - ariel - fix this, see comments on github, commit 2d2ef92d5e90619b26a087c871b64d5409c3cb89
             // after fix, delete the jshint flag!!!
-            if (starts === undefined) {
-                starts = 0;
-            }
-            if (setOriginCameraAndModel === func ) {
-                self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
-                arguments[1][0]=self.cameraXInitialValue;
-                func(arguments[1]);
-            } else {
-                func.apply(this, args);
-            }
+            starts =(starts === undefined) ? 0: starts;
+            func(self.statusVertically,self.statusHorizontally);
             if (starts <= 500) {
                 self.timeoutVar = setTimeout(function () {
-                    continuouslyMoveModel(func, args, ++starts);
+                    continuouslyMoveModel(func, ++starts);
+                }, 80);
+            }
+        }
+        function continuouslyMoveCameraModel(func, starts) {
+            starts =(starts === undefined) ? 0: starts;
+            self.cameraXInitialValue= self.statusHorizontally+self.cameraXInitialValue;
+            func([self.cameraXInitialValue, -100, -100, 0, 100, 100]);
+            if (starts <= 500) {
+                self.timeoutVar = setTimeout(function () {
+                    continuouslyMoveCameraModel(func, ++starts);
                 }, 80);
             }
         }
     };
 })(window);
+
