@@ -1,3 +1,4 @@
+/* globals Leap, app */
 $( document ).ready(function() {
     'use strict';
     var width = document.body.clientWidth,
