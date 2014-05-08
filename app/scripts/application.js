@@ -43,7 +43,6 @@
             self._viewer = new exports.o3v.Viewer();
             self.navigator = new exports.Navigator(self._viewer,options);
             self.layersManager = new exports.LayersManager(this._viewer,options);
-
             /*TODO create fields objects that encapsulates several viewer objects and uses options
                  this.layersManager = new LayersManager(this._viewer,options);
                  the layersManager should have at least the following methods

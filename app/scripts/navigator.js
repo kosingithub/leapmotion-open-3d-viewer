@@ -1,9 +1,17 @@
-/* jshint unused: false */
-// TODO - tony - This line silences "options is defined but never used" warning,
-// this flag and the unused var should be removed!!
 (function (exports) {
     'use strict';
     exports.Navigator = function (viewer, options) {
+        //Leap Motion Handler
+        var ctrl = '';
+        /* jshint ignore:start */
+        ctrl = new Leap.Controller({enableGestures:true}); // jshint ignore:line
+        /* jshint ignore:end */
+        var leapHandler = {
+            circle: ctrl.gesture('circle'),
+            direction: 0,
+            clockwise: false
+        };
+
         var viewerNavigator = viewer.navigator_, //
             move = viewerNavigator.drag.bind(viewerNavigator),
             zoom = viewerNavigator.scroll.bind(viewerNavigator),
@@ -13,6 +21,8 @@
         self.cameraXInitialValue = 0;
         self.statusVertically    = 0;
         self.statusHorizontally  = 0;
+
+
 
         this.spinModelLeft = function () {
             move(-options.MOVEMENT.TRANSLATION_HORIZONTAL_FACTOR, 0);
@@ -108,9 +118,6 @@
         };
 
         function continuouslyMoveModel(func, starts) {
-            /* jshint validthis:true */
-            // TODO - ariel - fix this, see comments on github, commit 2d2ef92d5e90619b26a087c871b64d5409c3cb89
-            // after fix, delete the jshint flag!!!
             starts =(starts === undefined) ? 0: starts;
             func(self.statusVertically,self.statusHorizontally);
             if (starts <= 500) {
@@ -121,7 +128,7 @@
         }
 
         function continuouslyMoveCameraModel(func, starts) {
-            starts =(starts === undefined) ? 0: starts;
+            starts = (starts === undefined) ? 0: starts;
             self.cameraXInitialValue += self.statusHorizontally;
             func([self.cameraXInitialValue, -100, -100, 0, 100, 100]);
             if (starts <= 500) {
@@ -130,6 +137,35 @@
                 }, 80);
             }
         }
+
+        function onCircle(gesture,frame){
+            if(gesture.type === 'circle' && gesture.state === 'stop'){
+                leapHandler.direction = frame.finger(gesture.pointableIds[0]).direction;
+                try {
+                    /* jshint ignore:start */
+                    leapHandler.clockwise = Leap.vec3.dot(leapHandler.direction, gesture.normal) > 0;
+                    /* jshint ignore:end */
+                }catch(e){
+                    console.log('Leaphandler.direction might be undefined!');
+                }
+                if(leapHandler.clockwise){
+                    if(frame.fingers.length >1){
+                        self.moveCameraUp();
+                    }else{
+                        self.spinModelRight();
+                    }
+                } else {
+                    if(frame.fingers.length >1){
+                        self.moveCameraDown();
+                    }else{
+                        self.spinModelLeft();
+                    }
+                }
+            }
+        }
+
+        ctrl.on('gesture',onCircle);
+        ctrl.connect();
     };
 })(window);
 
