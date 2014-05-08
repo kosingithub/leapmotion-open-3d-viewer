@@ -25,33 +25,18 @@
                 $('div').hide(300);
             }
         };
+        var layerStatus=0;
+        this.toggleLayers = function (layers) {
 
-        this.hideLayers = function (layers)
-        {
-            var layer, //
-                updateCallback = function () {
-                    console.log('hidden layer : ' + layer);
-                };
+            var layer;// 
             for (var i = 0; i < layers.length; i++) {
                 layer = layers[i];
-                _layerOpacityManager.setLayerOpacity(layer, 0 / 10000, updateCallback);
+                _layerOpacityManager.setLayerOpacity(layer, layerStatus);//     
             }
-        };
-
-        this.showLayers = function (layers) {
-            var layer,  //
-                updateCallback = function () {
-                    console.log('hidden layer : ' + layer);
-                };
-            //TODO implement this loop only once, this code is similar to the hide layers
-            for (var i = 0; i < layers.length; i++) {
-                layer = layers[i];
-                _layerOpacityManager.setLayerOpacity(layer, 10000 / 10000, updateCallback);
-            }
+            layerStatus = layerStatus === 0 ? 1 : 0;
         };
     };
 })(window);
-
 //this.layersManager = new LayersManager(this._viewer,options);
 //the layersManager should have at least the following methods
 //setLayerUiVisibility(:boolean)
