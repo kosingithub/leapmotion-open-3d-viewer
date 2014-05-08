@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>human body</title>
 
+        
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link type="text/css" href="../bower_components/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
@@ -25,7 +26,6 @@
         <script src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
         <script src="../bower_components/facebox/src/facebox.js"></script>
         <script src="../bower_components/gl-matrix/gl-matrix.js"></script>
-        <script src="../bower_components/leapjs/leap-0.5.0.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -71,20 +71,28 @@
         <!-- endbower -->
         <!-- endbuild -->
 
+
+        <!--leapmotion and pointer -->
+        <link href="scripts/leapmotion/crusor.css" rel="stylesheet" type="text/css">
+        <script src="//js.leapmotion.com/0.2.0/leap.js"></script>
+        <script src="scripts/leapmotion/leapmotionmain.js"></script>
+
     </head>
 
     <body>
 
+
+
         <!-- Canvas for verifying webgl -->
         <!-- TODO(dkogan): dynamically create this -->
-        <canvas id="gltest" style="display:none"></canvas>
+        <canvas id="gltest" style="display:none" ></canvas>
         <!-- Container for labels -->
         <!-- TODO(dkogan): dynamically create this and use css -->
         <div id="labelcontainer" style="width:0px; height:0px; left:0px; top:0px; position:absolute; z-index:1"></div>
 
-        <!-- <a href="#help" rel="facebox" id="link-help">
+        <a href="#help" rel="facebox" id="link-help">
             <img id="help-hidden" class="help-hidden" src="scripts/vendor/facebox/help.png" alt="?">
-        </a> -->
+        </a>
 
         <div id="loading-feedback" class="loading-feedback" style="visibility: hidden;">
             <label>LOADING</label>
@@ -92,6 +100,7 @@
                 <span id="loading-bar" style="width: 0px;"></span>
             </div>
         </div>
+        
 
         <div id="help" class="pop">
             <div id="help-content">
@@ -133,5 +142,7 @@
             </div>
         </div>
     </body>
+    
+
 
 </html>
