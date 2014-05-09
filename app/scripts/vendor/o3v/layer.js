@@ -36,7 +36,6 @@ o3v.LayerOpacityManager.prototype.getLayerOpacities = function () {
 };
 
 o3v.LayerOpacityManager.prototype.setLayerOpacity = function (layer, value, from) {
-    console.log('setLayerOpacity>> layer:'+layer +', value:'+value + ', from:'+ from);
     this.layerOpacities_[layer] = value;
     this.updateAllBut(from);
 };

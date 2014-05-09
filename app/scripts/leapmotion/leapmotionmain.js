@@ -1,4 +1,4 @@
-/* globals Leap, app */
+/* globals Leap, appendTo */
 $( document ).ready(function() {
     'use strict';
     var width = document.body.clientWidth,

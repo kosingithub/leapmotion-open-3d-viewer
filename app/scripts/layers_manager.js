@@ -3,6 +3,8 @@
 
     exports.LayersManager = function (viewer) {
         var _layerOpacityManager = viewer.layerOpacityManager_;
+        var turn=false;
+
         var _layers = {
             SKIN:   6,
             MUSCLE: 5,
@@ -16,38 +18,25 @@
             return _layers[layer];
         };
 
-        this.setLayerUiVisibility = function (isVisible) {
-            if (isVisible) {
+        this.setLayerUiVisibility = function () {
+            if (turn) {
                 $('div').show(300);
                 $('#help').hide();
-                $('#facebox').hide();
+                $('#facebox').hide();     
             }else{
                 $('div').hide(300);
             }
+            turn = !turn;
         };
+        var layerStatus=0;
+        this.toggleLayers = function (layers) {
 
-        this.hideLayers = function (layers)
-        {
-            var layer, //
-                updateCallback = function () {
-                    console.log('hidden layer : ' + layer);
-                };
+            var layer;// 
             for (var i = 0; i < layers.length; i++) {
                 layer = layers[i];
-                _layerOpacityManager.setLayerOpacity(layer, 0 / 10000, updateCallback);
+                _layerOpacityManager.setLayerOpacity(layer, layerStatus);//     
             }
-        };
-
-        this.showLayers = function (layers) {
-            var layer,  //
-                updateCallback = function () {
-                    console.log('hidden layer : ' + layer);
-                };
-            //TODO implement this loop only once, this code is similar to the hide layers
-            for (var i = 0; i < layers.length; i++) {
-                layer = layers[i];
-                _layerOpacityManager.setLayerOpacity(layer, 10000 / 10000, updateCallback);
-            }
+            layerStatus = layerStatus === 0 ? 1 : 0;
         };
     };
 })(window);
