@@ -1,13 +1,41 @@
-/* globals Leap, appendTo */
+/* globals Leap, app */
 $( document ).ready(function() {
     'use strict';
     var width = document.body.clientWidth,
         height = document.body.clientHeight;
     var status='stoped';
+    var lastPostition=0;
     // listen to leap motion
     Leap.loop({enableGestures: true}, function(frame) {
         $('.cursor').remove();
+        if (frame.pointables.length < 1){
+            return;
+        }
+        if (frame.pointables.length < 4){
+            pointer(frame);
+        }else if( frame.hands.length ===1 && frame.pointables.length > 3 ){
+            palm(frame);
+        }
 
+    });
+    function palm(frame){
+        frame.hands.forEach(function(hand,i) {
+            if (i > 0){
+                return;
+            }
+            var posZ = (hand.palmPosition[2] * 3) - 400;
+            if(posZ > lastPostition+10){
+                app.navigator.continuouslyZoomIn();
+                lastPostition = posZ;
+            }else if(posZ < lastPostition-10) {
+                app.navigator.continuouslyZoomOut();
+                lastPostition = posZ;
+            }else{
+                app.navigator.stopModelMovement();
+            }
+        });
+    }
+    function pointer(frame){
         if (frame.pointables.length < 1){
             return;
         }
@@ -64,5 +92,5 @@ $( document ).ready(function() {
                 status='stoped';
             }
         });
-    });
+    }
 });

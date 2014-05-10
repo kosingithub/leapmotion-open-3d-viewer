@@ -22,7 +22,7 @@
             if (turn) {
                 $('div').show(300);
                 $('#help').hide();
-                $('#facebox').hide();     
+                $('#facebox').hide();
             }else{
                 $('div').hide(300);
             }

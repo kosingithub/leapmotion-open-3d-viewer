@@ -182,7 +182,7 @@ MODELS['adult_female.obj'] = {
     decodeOffsets: [-2770,-35,-1278,0,0,-511,-511,-511],
     decodeScales: [0.009992,0.009992,0.009992,0.000978,0.000978,0.001957,0.001957,0.001957],
   },
-  urls: {
+  urls: {/*
     '0f8e2e39.adult_female.utf8': [
       { material: 'arma_sg',
         attribRange: [0, 6530],
@@ -613,7 +613,7 @@ MODELS['adult_female.obj'] = {
         lengths: [7056, ],
       },
     ],
-     */
+     
     '14ba5ad0.adult_female.utf8': [
       { material: 'pupil_sg',
         attribRange: [0, 814],
@@ -622,7 +622,7 @@ MODELS['adult_female.obj'] = {
         names: ['eyelashes', ],
         lengths: [1890, ],
       },
-    ],
+    ],*/
     '719052c0.adult_female.utf8': [
       { material: 'skeleton_arms',
         attribRange: [0, 8802],
@@ -694,7 +694,7 @@ MODELS['adult_female.obj'] = {
         names: ['mandible', 'skull_interior2', 'tooth_1', 'tooth_2', 'tooth_3', 'tooth_4', 'tooth_5', 'tooth_6', 'tooth_7', 'tooth_8', 'tooth_32', 'tooth_31', 'tooth_30', 'tooth_29', 'tooth_28', 'tooth_27', 'tooth_26', 'tooth_25', 'tooth_16', 'tooth_15', 'tooth_14', 'tooth_13', 'tooth_12', 'tooth_11', 'tooth_10', 'tooth_09', 'tooth_17', 'tooth_18', 'tooth_19', 'tooth_20', 'tooth_21', 'tooth_22', 'tooth_23', 'tooth_24', ],
         lengths: [8736, 43806, 639, 591, 816, 537, 561, 528, 477, 417, 726, 708, 723, 561, 507, 495, 432, 435, 639, 591, 816, 537, 561, 528, 477, 417, 726, 708, 723, 561, 507, 495, 432, 435, ],
       },
-    ],
+    ],/*
     'b496b2dd.adult_female.utf8': [
       { material: 'small_intestine_sg2',
         attribRange: [0, 8010],
@@ -757,6 +757,6 @@ MODELS['adult_female.obj'] = {
         names: ['r_kidney', 'l_kidney', 'l_adrenal_gland', 'r_adrenal_gland', 'r_ureter', 'l_ureter', 'urethra', 'bladder', ],
         lengths: [1638, 1860, 798, 660, 1782, 1749, 528, 2340, ],
       },
-    ],
+    ],*/
   }
 };
