@@ -238,15 +238,15 @@ module.exports = function (grunt) {
         // The following *-min tasks produce minified files in the dist folder
         imagemin: {
             dist: {
-                options: {
-                    imagemin:cache: false,
-                },
                 files: [{
                     expand: true,
                     cwd: '<%= config.app %>/images',
                     src: '{,*/}*.{gif,jpeg,jpg,png}',
                     dest: '<%= config.dist %>/images'
-                }]
+                }],
+                options: {
+                    cache: false
+                }
             }
         },
 
