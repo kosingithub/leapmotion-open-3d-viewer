@@ -1,0 +1,14 @@
+# Parts
+
+Box001
+	id: 5001
+	type: part
+
+# Layers
+
+# Groups
+
+Cube
+	id: 1
+	type: group
+	hidden : yes

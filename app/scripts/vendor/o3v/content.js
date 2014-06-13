@@ -17,6 +17,7 @@
  *               On initialization, loads model 0 in o3v.MODELS.
  */
 o3v.ContentManager = function () {
+    this.loader_ = null;
     this.models_ = o3v.MODELS;
     this.metadata_ = null;
     this.currentModel_ = -1;  // Force it to cycle to the first model.
@@ -64,9 +65,14 @@ o3v.ContentManager.prototype.loadModelAfterScript_ =
               loadModelCallback,  // After all meshes
               loadMetadataCallback  // After metadata
         ) {
-        // Call out to webgl loader.
-        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
-            loadModelCallback);
+        //TODO: Call out to webgl loader.--> soon to be Three.js
+        console.log('derp');
+        this.loader_ = new THREE.UTF8Loader();
+        this.loader_.load(modelInfo.modelPath + 'adult_female.js',function(object){
+            console.log(object);
+        },{normalizeRGB:true});
+//        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
+//            loadModelCallback);
 
         // Load metadata.
         this.loadMetadata_(modelInfo.modelPath + modelInfo.metadataFile,

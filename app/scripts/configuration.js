@@ -23,15 +23,16 @@
                     metadataFile: 'entity_metadata.json',
                     texturePath: 'models/common/',
                     numLayers: 7
-                },
-                {
-                    name: 'adult_male.obj',
-                    scriptName: 'adult_male.js',
-                    modelPath: 'models/adult_male/',
-                    metadataFile: 'entity_metadata.json',
-                    texturePath: 'models/common/',
-                    numLayers: 7
                 }
+//                },
+//                {
+//                    name: 'adult_male.obj',
+//                    scriptName: 'adult_male.js',
+//                    modelPath: 'models/adult_male/',
+//                    metadataFile: 'entity_metadata.json',
+//                    texturePath: 'models/common/',
+//                    numLayers: 7
+//                }
             ]
         };
 })(window);
