@@ -66,10 +66,27 @@ o3v.ContentManager.prototype.loadModelAfterScript_ =
               loadMetadataCallback  // After metadata
         ) {
         //TODO: Call out to webgl loader.--> soon to be Three.js
-        console.log('derp');
+        var scene,camera,renderer,container;
+        container = document.getElementById('labelcontainer');
+        //SCENE
+        scene = new THREE.Scene();
+        //CAM
+        var SCREEN_WIDTH = window.innerWidth,SCREEN_HEIGHT = window.innerHeight;
+        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH/SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+        camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR );
+        scene.add(camera);
+        camera.position.set(0,150,400);
+        camera.lookAt(scene.position);
+        //RENDERER
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+        container.appendChild(renderer.domElement);
+
+
+
         this.loader_ = new THREE.UTF8Loader();
-        this.loader_.load(modelInfo.modelPath + 'adult_female.js',function(object){
-            console.log(object);
+        this.loader_.load(modelInfo.modelPath + 'adult_female.json',modelInfo.modelPath + '../common/',function(object){
+            scene.add(object);
         },{normalizeRGB:true});
 //        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
 //            loadModelCallback);

@@ -55,6 +55,7 @@ var DEFAULT_DECODE_PARAMS = {
 /**
  * Load UTF8 encoded model
  * @param jsonUrl - URL from which to load json containing information about model
+ * @param materialDir - Directory containing the materials for the model
  * @param callback - Callback(THREE.Object3D) on successful loading of model
  * @param options - options on how to load model (see THREE.MTLLoader.MaterialCreator for basic options)
  *                  Additional options include
@@ -62,9 +63,9 @@ var DEFAULT_DECODE_PARAMS = {
  *                   materialBase: Base url from which to load referenced textures
  */
 
-THREE.UTF8Loader.prototype.load = function ( jsonUrl, callback, options ) {
+THREE.UTF8Loader.prototype.load = function ( jsonUrl,materialsDir, callback, options ) {
 
-    this.downloadModelJson( jsonUrl, options, callback );
+    this.downloadModelJson( jsonUrl, materialsDir, options, callback );
 
 };
 
@@ -710,7 +711,6 @@ THREE.UTF8Loader.prototype.createMeshCallback = function( materialBaseUrl, loadM
             nCompletedUrls ++;
 
             model.add( modelParts[ name ] );
-            console.log(modelParts);
 
             if ( nCompletedUrls === nExpectedUrls ) {
 
@@ -735,7 +735,7 @@ THREE.UTF8Loader.prototype.downloadModel = function ( geometryBase, materialBase
 
 };
 
-THREE.UTF8Loader.prototype.downloadModelJson = function ( jsonUrl, options, callback ) {
+THREE.UTF8Loader.prototype.downloadModelJson = function ( jsonUrl,materialsDir, options, callback ) {
 
     getJsonRequest( jsonUrl, function( loaded ) {
 
@@ -756,7 +756,10 @@ THREE.UTF8Loader.prototype.downloadModelJson = function ( jsonUrl, options, call
         loaded.options = options;
 
         var geometryBase = jsonUrl.substr( 0, jsonUrl.lastIndexOf( "/" ) + 1 );
-        var materialBase = geometryBase;
+        //TODO:(Angel)This assumes you have all the material img's on models.js parent's directory,however it's two folders up and then inside the common folder.
+
+        var materialBase = materialsDir;
+        //var materialBase = geometryBase;
 
         if ( options && options.geometryBase ) {
 
