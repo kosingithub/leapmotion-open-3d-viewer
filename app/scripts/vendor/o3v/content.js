@@ -18,6 +18,10 @@
  */
 o3v.ContentManager = function () {
     this.loader_ = null;
+    this.renderer = null;
+    this.scene = null;
+    this.camera = null;
+    var that = null;
     this.models_ = o3v.MODELS;
     this.metadata_ = null;
     this.currentModel_ = -1;  // Force it to cycle to the first model.
@@ -60,34 +64,66 @@ o3v.ContentManager.prototype.loadModel_ =
         }
     };
 
+o3v.ContentManager.prototype.init = function(modelInfo){
+    that = this;
+    var container = document.getElementById('viewer');
+    //SCENE
+    this.scene = new THREE.Scene();
+    var ambientLight = new THREE.AmbientLight(0x404040);
+    //LIGHT
+    //added directional lighting to the model
+    this.scene.add(ambientLight);
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(1, 1, 1).normalize();
+    this.scene.add(directionalLight);
+    //CAM
+    var SCREEN_WIDTH = window.innerWidth,SCREEN_HEIGHT = window.innerHeight;
+    var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH/SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+    this.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR );
+    this.scene.add(this.camera);
+    this.camera.position.set(0,150,400);
+    this.camera.lookAt(this.scene.position);
+    //RENDERER
+    this.renderer = new THREE.WebGLRenderer({canvas:container,antialias:true});
+    this.renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+    //this.renderer.domElement = container;
+    //container = this.renderer.domElement;
+    //container.appendChild(this.renderer.domElement);
+
+
+
+    this.loader_ = new THREE.UTF8Loader();
+    this.loader_.load(modelInfo.modelPath + 'adult_female.json',modelInfo.modelPath + '../common/',function(object){
+        var s = 1.5;
+        object.scale.set(s,s,s);
+        object.position.x = 0;
+        object.position.y = -125;
+        that.scene.add(object);
+    },{normalizeRGB:true});
+    animate();
+};
+
+var animate = function(){
+    requestAnimationFrame(animate);
+    render();
+    update();
+};
+
+function update(){
+
+};
+
+var render = function(){
+    that.renderer.render(that.scene,that.camera);
+}
+
 o3v.ContentManager.prototype.loadModelAfterScript_ =
     function (modelInfo, loadMeshCallback,  // After each mesh
               loadModelCallback,  // After all meshes
               loadMetadataCallback  // After metadata
         ) {
         //TODO: Call out to webgl loader.--> soon to be Three.js
-        var scene,camera,renderer,container;
-        container = document.getElementById('labelcontainer');
-        //SCENE
-        scene = new THREE.Scene();
-        //CAM
-        var SCREEN_WIDTH = window.innerWidth,SCREEN_HEIGHT = window.innerHeight;
-        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH/SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
-        camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR );
-        scene.add(camera);
-        camera.position.set(0,150,400);
-        camera.lookAt(scene.position);
-        //RENDERER
-        renderer = new THREE.WebGLRenderer({antialias:true});
-        renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
-        container.appendChild(renderer.domElement);
-
-
-
-        this.loader_ = new THREE.UTF8Loader();
-        this.loader_.load(modelInfo.modelPath + 'adult_female.json',modelInfo.modelPath + '../common/',function(object){
-            scene.add(object);
-        },{normalizeRGB:true});
+        this.init(modelInfo);
 //        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
 //            loadModelCallback);
 
@@ -104,6 +140,7 @@ o3v.ContentManager.prototype.loadMetadata_ = function (metadataPath, modelMetada
         callback();
     } else {
         var self = this;
+
 
         function onload(req) {
             // TODO: error handling.
