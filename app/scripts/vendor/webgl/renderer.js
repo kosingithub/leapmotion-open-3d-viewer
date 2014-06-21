@@ -472,18 +472,60 @@ Renderer.prototype.onMeshLoad =
   var texture = this.textureFromMaterialFunction_(this.gl_, meshEntry.material,
                                                   this.postRedisplay.bind(
                                                       this));
+        if(meshEntry.material === 'skeleton_arms'){
+            var c = [];
+            for(var i = 0; i < indexArray.length;i++){
+                c[indexArray[i]] = +1;
+            }
+            console.log(c);
+            for(var x = 0; x<= attribArray.length; x++){
+                //attribArray[x] -= 10;
+                //if(x > 17424 && x < 23197){//ulna
+                //if(x > 23197 && x < 30169){//humerus
 
-  // Set color for meshes, and record the mapping of color to name.
-  var startColorIndex = this.maxColorIndex_;
-  for (var i = 0; i < meshEntry.names.length; i++) {
-    this.colorToName_[startColorIndex + i] = meshEntry.names[i];
-  }
-  this.maxColorIndex_ += meshEntry.lengths.length;
+                //if(x >= 0 && x <= 13304){
+                    //if(1===x%8) attribArray[x] -= 50;
 
-  this.meshes_.push(
-      new Mesh(this.gl_, attribArray, indexArray, DEFAULT_ATTRIB_ARRAYS,
-               texture, meshEntry.names, meshEntry.lengths, bboxes,
-               startColorIndex));
+
+                    if(x > attribArray.length/2){//half
+                        attribArray[x] += 1 ;
+                    }else{
+                        attribArray[x] -= 1 ;
+                    }
+                //}
+            }
+        }
+
+                /*0: 8712 0: "r_scapula" :R 0 - 13306
+                                            13312 - 17896
+                 1: 2886 1: "r_radius"   :R 17896 - 23376
+                 2: 3486 2: "r_ulna"     :R 23197 - 30169
+                 3: 4782 3: "r_humerus"  :R 30169 - 39733
+                 4: 2772 4: "r_clavicle" :R 39733 - 45277
+                 5: 8712 5: "l_scapula"  :R 45277 - 62701
+                 6: 2886 6: "l_radius"   :R 62701 - 68473
+                 7: 3486 7: "l_ulna"     :R 68473 - 75445
+                 8: 4782 8: "l_humerus"  :R 75445 - 85009
+                 9: 2772 9: "l_clavicle" :R 85009 - 90553
+                 */
+
+
+
+              // Set color for meshes, and record the mapping of color to name.
+              var startColorIndex = this.maxColorIndex_;
+              for (var i = 0; i < meshEntry.names.length; i++) {
+                this.colorToName_[startColorIndex + i] = meshEntry.names[i];
+              }
+              this.maxColorIndex_ += meshEntry.lengths.length;
+
+              this.meshes_.push(
+                  new Mesh(this.gl_, attribArray, indexArray, DEFAULT_ATTRIB_ARRAYS,
+                           texture, meshEntry.names, meshEntry.lengths, bboxes,
+                           startColorIndex));
+
+
+
+
 };
 
 Renderer.prototype.reset = function() {

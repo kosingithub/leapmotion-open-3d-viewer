@@ -182,7 +182,8 @@ MODELS['adult_female.obj'] = {
     decodeOffsets: [-2770,-35,-1278,0,0,-511,-511,-511],
     decodeScales: [0.009992,0.009992,0.009992,0.000978,0.000978,0.001957,0.001957,0.001957],
   },
-  urls: {/*
+  urls: {
+      /*
     '0f8e2e39.adult_female.utf8': [
       { material: 'arma_sg',
         attribRange: [0, 6530],
@@ -602,7 +603,7 @@ MODELS['adult_female.obj'] = {
         names: ['l_vagus_nerve', 'l_hypoglossal_nerve', 'l_abducens_nerve', 'r_abducens_nerve', 'r_facial_nerve', 'r_accessory_nerve', 'r_glossopharyngeal_nerve', 'r_vagus_nerve', 'l_cervical_spinal_nerve_c1', 'r_cervical_spinal_nerve_c1', ],
         lengths: [11217, 4644, 930, 930, 14904, 3444, 1716, 13068, 14880, 14880, ],
       },
-    ],
+    ],*/
     /*
     'aa891309.adult_female.utf8': [
       { material: 'outer_eye_sg',
