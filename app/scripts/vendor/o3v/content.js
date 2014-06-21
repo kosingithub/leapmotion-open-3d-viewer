@@ -21,7 +21,14 @@ o3v.ContentManager = function () {
     this.renderer = null;
     this.scene = null;
     this.camera = null;
+    var skeleton = null;
+    this.nope =null;
+    this.scale = 1.5;
     var that = null;
+    this.clock = new THREE.Clock();
+    var controls = null;
+    this.keyboard = new THREEx.KeyboardState();
+
     this.models_ = o3v.MODELS;
     this.metadata_ = null;
     this.currentModel_ = -1;  // Force it to cycle to the first model.
@@ -86,6 +93,8 @@ o3v.ContentManager.prototype.init = function(modelInfo){
     //RENDERER
     this.renderer = new THREE.WebGLRenderer({canvas:container,antialias:true});
     this.renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+    //CONTROLS
+    controls = new THREE.OrbitControls(this.camera,this.renderer.domElement);
     //this.renderer.domElement = container;
     //container = this.renderer.domElement;
     //container.appendChild(this.renderer.domElement);
@@ -95,6 +104,8 @@ o3v.ContentManager.prototype.init = function(modelInfo){
     this.loader_ = new THREE.UTF8Loader();
     this.loader_.load(modelInfo.modelPath + 'adult_female.json',modelInfo.modelPath + '../common/',function(object){
         var s = 1.5;
+        that.skeleton = object;
+        that.nope = object.children[2];
         object.scale.set(s,s,s);
         object.position.x = 0;
         object.position.y = -125;
@@ -109,9 +120,68 @@ var animate = function(){
     update();
 };
 
-function update(){
+var update = function(){
+    //that.skeleton;
 
-};
+    var delta = that.clock.getDelta();//seconds
+    var moveDistance = 200 * delta;//200px per second
+    var rotateAngle = Math.PI / 2 * delta // PI/2 radians (90 degrees) per second
+    //local coordinates
+
+    //local transformations
+
+    //move forwards/backward/left/right
+    if(that.keyboard.pressed("W"))
+        that.skeleton.translateZ(moveDistance);
+    if(that.keyboard.pressed("S"))
+        that.skeleton.translateZ(-moveDistance);
+    if(that.keyboard.pressed("Q"))
+        that.skeleton.translateX(-moveDistance);
+    if(that.keyboard.pressed("E"))
+        that.skeleton.translateX( moveDistance);
+
+    //rotate left/right/up/down
+    var rotation_matrix = new THREE.Matrix4().identity();
+    if(that.keyboard.pressed("A"))
+        that.skeleton.rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
+    if(that.keyboard.pressed("D"))
+        that.skeleton.rotateOnAxis(new THREE.Vector3(0,1,0),-rotateAngle);
+    if(that.keyboard.pressed("R"))
+        that.skeleton.rotateOnAxis(new THREE.Vector3(1,0,0), rotateAngle);
+    if(that.keyboard.pressed("F"))
+        that.skeleton.rotateOnAxis(new THREE.Vector3(1,0,0),-rotateAngle);
+
+    if(that.keyboard.pressed("Z")){
+        that.skeleton.position.set(0,0,0);
+        that.skeleton.rotation.set(0,0,0);
+    }
+
+    //NOPE 1-4-
+    if(that.keyboard.pressed('left')){
+        that.nope.rotateOnAxis(new THREE.Vector3(0,1,0), -rotateAngle);
+        //that.skeleton.children[3].rotateOnAxis(new THREE.Vector3(0,1,0), -rotateAngle);
+    }
+    if(that.keyboard.pressed('right')){
+        that.nope.rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
+        //that.skeleton.children[3].rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
+    }
+
+
+    //Size
+    if(that.keyboard.pressed('up')){
+        that.scale *= 1.01;
+        that.skeleton.scale.set(that.scale,that.scale,that.scale);
+    }
+    if(that.keyboard.pressed('down')){
+        that.scale *= 0.99;
+        that.skeleton.scale.set(that.scale,that.scale,that.scale);
+    }
+    if(that.keyboard.pressed("0")){
+        that.scale = 1.5;
+    }
+
+    controls.update();
+}
 
 var render = function(){
     that.renderer.render(that.scene,that.camera);

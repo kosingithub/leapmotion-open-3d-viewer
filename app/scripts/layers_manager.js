@@ -24,7 +24,7 @@
                 $('#help').hide();
                 $('#facebox').hide();
             }else{
-                $('div').hide(300);
+                $('div').hide();
             }
             turn = !turn;
         };
