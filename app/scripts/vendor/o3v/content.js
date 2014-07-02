@@ -77,6 +77,8 @@ o3v.ContentManager.prototype.init = function(modelInfo){
     //SCENE
     this.scene = new THREE.Scene();
     var ambientLight = new THREE.AmbientLight(0x404040);
+    ambientLight.position.set(1,1,1).normalize();
+    this.scene.add(ambientLight);
     //LIGHT
     //added directional lighting to the model
     this.scene.add(ambientLight);
@@ -143,28 +145,14 @@ var update = function(){
     //rotate left/right/up/down
     var rotation_matrix = new THREE.Matrix4().identity();
     if(that.keyboard.pressed("A"))
-        that.skeleton.rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
+        that.skeleton.rotateOnAxis(new THREE.Vector3(0,0,1), rotateAngle);
     if(that.keyboard.pressed("D"))
-        that.skeleton.rotateOnAxis(new THREE.Vector3(0,1,0),-rotateAngle);
+        that.skeleton.rotateOnAxis(new THREE.Vector3(0,0,1),-rotateAngle);
     if(that.keyboard.pressed("R"))
         that.skeleton.rotateOnAxis(new THREE.Vector3(1,0,0), rotateAngle);
     if(that.keyboard.pressed("F"))
         that.skeleton.rotateOnAxis(new THREE.Vector3(1,0,0),-rotateAngle);
 
-    if(that.keyboard.pressed("Z")){
-        that.skeleton.position.set(0,0,0);
-        that.skeleton.rotation.set(0,0,0);
-    }
-
-    //NOPE 1-4-
-    if(that.keyboard.pressed('left')){
-        that.nope.rotateOnAxis(new THREE.Vector3(0,1,0), -rotateAngle);
-        //that.skeleton.children[3].rotateOnAxis(new THREE.Vector3(0,1,0), -rotateAngle);
-    }
-    if(that.keyboard.pressed('right')){
-        that.nope.rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
-        //that.skeleton.children[3].rotateOnAxis(new THREE.Vector3(0,1,0), rotateAngle);
-    }
 
 
     //Size
