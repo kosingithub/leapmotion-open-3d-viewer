@@ -67,7 +67,7 @@ o3v.ContentManager.prototype.loadModelAfterScript_ =
               loadMetadataCallback  // After metadata
         ) {
         //TODO: Call out to webgl loader.--> soon to be Three.js
-        this.threeJS_.load(modelInfo,modelInfo);
+        this.threeJS_.load(modelInfo.modelPath + modelInfo.metadataScriptName,modelInfo.texturePath);
 //        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
 //            loadModelCallback);
 

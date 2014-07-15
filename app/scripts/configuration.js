@@ -17,9 +17,12 @@
             },
             MODELS: [
                 {
+                    //TODO:(Angel) script name and metadata script should be the same file
                     name: 'adult_female.obj',
                     scriptName: 'adult_female.js',
+                    metadataScriptName:'adult_female.json',
                     modelPath: 'models/adult_female/',
+                    materialsPath: 'models/common/',
                     metadataFile: 'entity_metadata.json',
                     texturePath: 'models/common/',
                     numLayers: 7

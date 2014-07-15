@@ -2,7 +2,7 @@
 o3v = (function(exports){
 
     function ThreeInterface(){
-        var that = this;
+        var self = this;
         this.loader_ = null;
         //Scene
         this.container   = document.getElementById('viewer');
@@ -45,14 +45,14 @@ o3v = (function(exports){
         }
 
         function update(){
-//            var delta = that.clock.getDelta();
+//            var delta = self.clock.getDelta();
 //            var rotateAngle = Math.PI / 2 * delta;
 
-            that.controls.update();
+            self.controls.update();
         }
 
         function render(){
-            that.renderer.render(that.scene,that.camera);
+            self.renderer.render(self.scene,self.camera);
         }
     }
 
@@ -64,6 +64,7 @@ o3v = (function(exports){
             object.position.x = 0;
             object.position.y = -125;
             this.scene.add(object);
+            //TODO: (Angel) set loaded model to global model obj
         }.bind(this),{normalizeRGB:true});
         this.start();
     };
