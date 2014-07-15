@@ -2,6 +2,7 @@
 o3v = (function(exports){
 
     function ThreeInterface(){
+        var that = this;
         this.loader_ = null;
         //Scene
         this.container   = document.getElementById('viewer');
@@ -26,27 +27,16 @@ o3v = (function(exports){
         this.camera.position.set(0,150,400);
         this.camera.lookAt(this.scene.position);
         //Renderer
-        var renderer = new THREE.WebGLRenderer({canvas: this.container, antialias: true});
-        renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+        this.renderer = new THREE.WebGLRenderer({canvas: this.container, antialias: true});
+        this.renderer.setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
         this.clock    = new THREE.Clock();
         //Scene controls
-        this.controls = new THREE.OrbitControls(this.camera, renderer.domElement);
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
         this.keyboard = new THREEx.KeyboardState();
-    }
 
-
-    ThreeInterface.prototype = (function(){
-
-        function load(modelInfoPath,materialsPath){
-            this.loader_  = new THREE.UTF8Loader();
-            this.loader_.load(modelInfoPath,materialsPath,function(object){
-                object.scale.set(1,1,1);
-                object.position.x = 0;
-                object.position.y = -125;
-                this.scene.add(object);
-            }.bind(this),{normalizeRGB:true});
-            this.animate();
-        }
+        this.start = function(){
+            animate();
+        };
 
         function animate(){
             requestAnimationFrame(animate);
@@ -55,23 +45,28 @@ o3v = (function(exports){
         }
 
         function update(){
-            var delta = this.clock.getDelta();
-            var rotateAngle = Math.PI / 2 * delta;
+//            var delta = that.clock.getDelta();
+//            var rotateAngle = Math.PI / 2 * delta;
 
-            this.controls.update();
+            that.controls.update();
         }
 
         function render(){
-            renderer.render(this.scene,this.camera);
+            that.renderer.render(that.scene,that.camera);
         }
+    }
 
-        return {
-            load:load,
-            animate: animate,
-            update: update,
-            render: render
-        }
-    })();
+
+    ThreeInterface.prototype.load = function(modelInfoPath,materialsPath){
+        this.loader_  = new THREE.UTF8Loader();
+        this.loader_.load(modelInfoPath,materialsPath,function(object){
+            object.scale.set(1,1,1);
+            object.position.x = 0;
+            object.position.y = -125;
+            this.scene.add(object);
+        }.bind(this),{normalizeRGB:true});
+        this.start();
+    };
 
     exports.ThreeInterface = ThreeInterface;
     return exports;
