@@ -1,9 +1,11 @@
 
 o3v = (function(exports){
 
-    function ThreeInterface(){
+    function ThreeInterface(models){
         var self = this;
         this.loader_ = null;
+        this.models = models;
+        this.models.threeModels = [];
         //Scene
         this.container   = document.getElementById('viewer');
         this.scene       = new THREE.Scene();
@@ -24,7 +26,7 @@ o3v = (function(exports){
         var NEAR          = 0.1;
         var FAR           = 10000;
         this.camera       = new THREE.PerspectiveCamera(VIEW_ANGLE , ASPECT , NEAR , FAR);
-        this.camera.position.set(0,150,400);
+        this.camera.position.set(0,50,300);
         this.camera.lookAt(this.scene.position);
         //Renderer
         this.renderer = new THREE.WebGLRenderer({canvas: this.container, antialias: true});
@@ -45,6 +47,7 @@ o3v = (function(exports){
         }
 
         function update(){
+            //TODO: (Angel) movement functions are called here
 //            var delta = self.clock.getDelta();
 //            var rotateAngle = Math.PI / 2 * delta;
 
@@ -57,15 +60,16 @@ o3v = (function(exports){
     }
 
 
-    ThreeInterface.prototype.load = function(modelInfoPath,materialsPath){
+    ThreeInterface.prototype.load = function(modelInfoPath, materialsPath, partialCallback, fullCallback){
         this.loader_  = new THREE.UTF8Loader();
-        this.loader_.load(modelInfoPath,materialsPath,function(object){
+        this.loader_.load(modelInfoPath, materialsPath, function(object){
             object.scale.set(1,1,1);
             object.position.x = 0;
             object.position.y = -125;
             this.scene.add(object);
-            //TODO: (Angel) set loaded model to global model obj
-        }.bind(this),{normalizeRGB:true});
+            this.models.threeModels.push(object);
+            //TODO: (Angel) set name property of the model
+        }.bind(this), partialCallback, fullCallback, {normalizeRGB:true});
         this.start();
     };
 

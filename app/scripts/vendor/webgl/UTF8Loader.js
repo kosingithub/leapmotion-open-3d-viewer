@@ -55,17 +55,18 @@ var DEFAULT_DECODE_PARAMS = {
 /**
  * Load UTF8 encoded model
  * @param jsonUrl - URL from which to load json containing information about model
- * @param materialDir - Directory containing the materials for the model
- * @param callback - Callback(THREE.Object3D) on successful loading of model
+ * @param materialsDir - Directory containing the materials for the model
+ * @param partialCallback - Callback(THREE.Object3D) on each successful loaded mesh
+ * @param fullCallback - Callback(THREE.Object3D) on successful loaded model
  * @param options - options on how to load model (see THREE.MTLLoader.MaterialCreator for basic options)
  *                  Additional options include
  *                   geometryBase: Base url from which to load referenced geometries
  *                   materialBase: Base url from which to load referenced textures
  */
 
-THREE.UTF8Loader.prototype.load = function ( jsonUrl,materialsDir, callback, options ) {
+THREE.UTF8Loader.prototype.load = function ( jsonUrl,materialsDir, partialCallback, fullCallback, options ) {
 
-    this.downloadModelJson( jsonUrl, materialsDir, options, callback );
+    this.downloadModelJson( jsonUrl, materialsDir, options, partialCallback, fullCallback );
 
 };
 
@@ -639,11 +640,15 @@ THREE.UTF8Loader.prototype.downloadMesh = function ( path, name, meshEntry, deco
 
 THREE.UTF8Loader.prototype.downloadMeshes = function ( path, meshUrlMap, decodeParams, callback ) {
 
+    var pendingCount = 0;
+    var totalEntries = 0;
+    o3v.util.forEach(meshUrlMap,function(meshEntry){
+        pendingCount += meshEntry.length;
+    });
+    totalEntries = pendingCount;
     for ( var url in meshUrlMap ) {
-
         var meshEntry = meshUrlMap[url];
         this.downloadMesh( path + url, url, meshEntry, decodeParams, callback );
-
     }
 
 };
@@ -701,15 +706,14 @@ THREE.UTF8Loader.prototype.createMeshCallback = function( materialBaseUrl, loadM
 
         var mesh = new THREE.Mesh( geometry, material );
         modelParts[ name ].add( mesh );
-
+        MODELS.derp.push(mesh);
         //model.add(new THREE.Mesh(geometry, material));
 
         decodedMeshesPerUrl[ name ] ++;
 
         if ( decodedMeshesPerUrl[ name ] === expectedMeshesPerUrl[ name ] ) {
-
             nCompletedUrls ++;
-
+            updateProgress(nCompletedUrls,nExpectedUrls);
             model.add( modelParts[ name ] );
 
             if ( nCompletedUrls === nExpectedUrls ) {
@@ -835,5 +839,7 @@ function updateProgress(current, total)
         var diff = ((total - current)/total)*240;
         $('#loading-bar').css('width', diff + 'px');
 
+    } else if(total === current) {
+        $('#loading-feedback').fadeOut(1500);
     }
 }

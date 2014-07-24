@@ -127,7 +127,7 @@ function Renderer(canvas, textureFromMaterialFunction) {
   this.selectionFbo_ = { width: 0, height: 0 };
 
   this.forceColored_ = false;
-};
+}
 
 Renderer.prototype.onloadShaders = function(req) {
   // TODO: error handling.

@@ -17,9 +17,9 @@
  *               On initialization, loads model 0 in o3v.MODELS.
  */
 o3v.ContentManager = function () {
-    this.threeJS_ = new o3v.ThreeInterface();
-
     this.models_ = o3v.MODELS;
+
+    this.threeJS_ = new o3v.ThreeInterface(this.models_);
     this.metadata_ = null;
     this.currentModel_ = -1;  // Force it to cycle to the first model.
 
@@ -66,11 +66,11 @@ o3v.ContentManager.prototype.loadModelAfterScript_ =
               loadModelCallback,  // After all meshes
               loadMetadataCallback  // After metadata
         ) {
-        //TODO: Call out to webgl loader.--> soon to be Three.js
-        this.threeJS_.load(modelInfo.modelPath + modelInfo.metadataScriptName,modelInfo.texturePath);
+        //TODO: loadMeshCallback & loadModelCallback need to be applied
+        MODELS.derp = [];
+        this.threeJS_.load(modelInfo.modelPath + modelInfo.metadataScriptName, modelInfo.texturePath, loadMeshCallback, loadModelCallback);
 //        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
 //            loadModelCallback);
-
         // Load metadata.
         this.loadMetadata_(modelInfo.modelPath + modelInfo.metadataFile,
             MODELS[modelInfo.name],
@@ -92,7 +92,7 @@ o3v.ContentManager.prototype.loadMetadata_ = function (metadataPath, modelMetada
             self.metadata_ = new o3v.EntityModel(modelMetadata, metadata);
             self.metadataLoaded_[metadataPath] = this.metadata_;
             callback();
-        };
+        }
 
         getHttpRequest(metadataPath, onload);
     }

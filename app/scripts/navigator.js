@@ -9,6 +9,7 @@
             zoom = viewerNavigator.scroll.bind(viewerNavigator),
             setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
         var self = this;
+        var viewerContentManager = viewer.contentManager_;
         self.timeoutVar          = 0;
         self.cameraXInitialValue = 0;
         self.statusVertically    = 0;

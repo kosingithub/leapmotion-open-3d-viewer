@@ -61,6 +61,7 @@ o3v.LayersUI.SingleSlider.prototype.build = function (putBelow, numLayers) {
         this.slider.remove();
     }
 
+
     this.slider = $('<div>').appendTo('body').slider({
         orientation: 'vertical',
         range: 'min',
