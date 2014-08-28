@@ -9,7 +9,10 @@
             zoom = viewerNavigator.scroll.bind(viewerNavigator),
             setOriginCameraAndModel = viewerNavigator.setOriginCameraAndModelRoot.bind(viewerNavigator);
         var self = this;
-        var viewerContentManager = viewer.contentManager_;
+        var currentModelID = viewer.contentManager_.currentModel_ || 0;
+        var currentModel = viewer.contentManager_.models_.threeModels[currentModelID];
+        console.log(currentModel);
+        console.log('nav nav');
         self.timeoutVar          = 0;
         self.cameraXInitialValue = 0;
         self.statusVertically    = 0;

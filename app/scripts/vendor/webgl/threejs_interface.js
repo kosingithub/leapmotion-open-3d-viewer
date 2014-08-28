@@ -68,6 +68,7 @@ o3v = (function(exports){
             object.position.y = -125;
             this.scene.add(object);
             this.models.threeModels.push(object);
+            console.log('DONE');
             //TODO: (Angel) set name property of the model
         }.bind(this), partialCallback, fullCallback, {normalizeRGB:true});
         this.start();

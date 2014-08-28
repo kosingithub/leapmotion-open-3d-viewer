@@ -41,6 +41,7 @@
         this.run = function (options) {
             this.init(options);
             self._viewer = new exports.o3v.Viewer();
+            //TODO: (Angel) create nav instance after model callback is complete
             self.navigator = new exports.Navigator(self._viewer,options);
             self.layersManager = new exports.LayersManager(this._viewer,options);
 

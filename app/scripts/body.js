@@ -4,7 +4,7 @@
     jQuery(document).ready(function () {
         window.app = new exports.Application();
         window.app.run(exports.appOptions);
-
+        app.layersManager.setLayerUiVisibility();//Temporal just For first Demo
     });
 
 })(window, document);
