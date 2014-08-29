@@ -67,7 +67,6 @@ o3v.ContentManager.prototype.loadModelAfterScript_ =
               loadMetadataCallback  // After metadata
         ) {
         //TODO: loadMeshCallback & loadModelCallback need to be applied
-        MODELS.derp = [];
         this.threeJS_.load(modelInfo.modelPath + modelInfo.metadataScriptName, modelInfo.texturePath, loadMeshCallback, loadModelCallback);
 //        downloadModel(modelInfo.modelPath, modelInfo.name, loadMeshCallback,
 //            loadModelCallback);

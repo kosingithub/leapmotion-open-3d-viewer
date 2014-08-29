@@ -706,7 +706,6 @@ THREE.UTF8Loader.prototype.createMeshCallback = function( materialBaseUrl, loadM
 
         var mesh = new THREE.Mesh( geometry, material );
         modelParts[ name ].add( mesh );
-        MODELS.derp.push(mesh);
         //model.add(new THREE.Mesh(geometry, material));
 
         decodedMeshesPerUrl[ name ] ++;
